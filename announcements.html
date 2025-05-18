@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements - MelonMC</title>
+    <meta name="description" content="View all the latest announcements from MelonMC server, including updates, events, and maintenance schedules.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Vercel Analytics -->
+    <script defer src="/_vercel/insights/script.js"></script>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBwxuW2cdXbwGAkx91kQD9Nk4GhF1vReHQ",
+            authDomain: "melonmc-admin.firebaseapp.com",
+            projectId: "melonmc-admin",
+            storageBucket: "melonmc-admin.appspot.com",
+            messagingSenderId: "123456789012",
+            appId: "1:123456789012:web:abcdef1234567890abcdef"
+        };
+        
+        // Initialize Firebase with error handling
+        try {
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+            console.log("Firebase initialized for public site");
+        } catch (error) {
+            console.warn("Firebase initialization failed:", error);
+        }
+    </script>
+</head>
+<body>
+    <!-- Login Overlay -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-container">
+            <img src="assets/logo.png" alt="MelonMC Logo" class="login-logo">
+            <h2>Welcome to MelonMC</h2>
+            <p>Enter your Minecraft gamertag to continue</p>
+            <form class="login-form" id="loginForm">
+                <input type="text" id="gamertag" placeholder="Your Minecraft Gamertag" required>
+                <button type="submit" class="button premium-button">
+                    <span class="button-glow"></span>
+                    Let's Play!
+                    <div class="button-shine"></div>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Premium Animation Overlay -->
+    <div class="premium-overlay"></div>
+    
+    <!-- Header & Navigation -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="assets/logo.png" alt="MelonMC Logo" class="floating">
+            </div>
+            <div class="nav-buttons">
+                <!-- User welcome message - hidden by default -->
+                <div class="user-welcome" id="userWelcome" style="display:none;">
+                    <span>Welcome to MelonMC, <span id="userGamertag"></span>!</span>
+                    <button id="logoutButton"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+                <a href="index.html" class="nav-button">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="server-info.html" class="nav-button">
+                    <i class="fas fa-server"></i>
+                    <span>Info</span>
+                </a>
+                <a href="announcements.html" class="nav-button active">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Announcements</span>
+                </a>
+                <a href="features.html" class="nav-button">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Features</span>
+                </a>
+                <a href="ranks.html" class="nav-button">
+                    <i class="fas fa-crown"></i>
+                    <span>Ranks</span>
+                </a>
+                <a href="rules.html" class="nav-button">
+                    <i class="fas fa-gavel"></i>
+                    <span>Rules</span>
+                </a>
+                <a href="index.html#join" class="nav-button">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Join</span>
+                </a>
+                <a href="https://discord.com/channels/1148113389252522074/1365721945131192391" target="_blank" class="nav-button">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Store</span>
+                </a>
+                <a href="https://discord.gg/melonmc" target="_blank" class="nav-button discord-btn">
+                    <i class="fab fa-discord"></i>
+                    <span>Discord</span>
+                </a>
+            </div>
+            <!-- Mobile menu toggle -->
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header announcements-header">
+        <div class="container">
+            <h1 class="animated-text" data-aos="fade-up">Server Announcements</h1>
+            <p data-aos="fade-up" data-aos-delay="100">Stay updated with the latest news and events from MelonMC</p>
+        </div>
+    </section>
+
+    <!-- Announcements Section -->
+    <section class="announcements-page-section">
+        <div class="container">
+            <!-- Filters -->
+            <div class="announcement-filters" data-aos="fade-up">
+                <div class="announcement-filter-group">
+                    <label for="announcement-type-filter">Filter by Type:</label>
+                    <select id="announcement-type-filter" class="filter-select">
+                        <option value="all">All Types</option>
+                        <option value="update">Updates</option>
+                        <option value="warning">Warnings</option>
+                        <option value="critical">Critical</option>
+                    </select>
+                </div>
+                
+                <div class="announcement-search">
+                    <input type="text" id="announcement-search" placeholder="Search announcements...">
+                    <button id="announcement-search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Announcements List -->
+            <div class="announcements-container full-list" id="announcementsContainer" data-aos="fade-up" data-aos-delay="200">
+                <!-- Announcements will be loaded dynamically via JavaScript -->
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Loading announcements...</p>
+                </div>
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="load-more-container" data-aos="fade-up">
+                <button id="load-more-btn" class="button secondary">
+                    <i class="fas fa-sync-alt"></i> Load More
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="assets/logo.png" alt="MelonMC Logo" class="floating">
+                    <h3>MelonMC</h3>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Navigation</h4>
+                        <a href="index.html">Home</a>
+                        <a href="server-info.html">Server Info</a>
+                        <a href="announcements.html">Announcements</a>
+                        <a href="features.html">Features</a>
+                        <a href="ranks.html">Ranks</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="rules.html">Server Rules</a>
+                        <a href="privacy.html">Privacy Policy</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <a href="https://discord.gg/melonmc" target="_blank">Discord</a>
+                        <a href="https://discord.com/channels/1148113389252522074/1365721945131192391" target="_blank">Store</a>
+                        <a href="index.html#join">Join Server</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MelonMC Network. Not affiliated with Mojang Studios.</p>
+                <div class="social-links">
+                    <a href="https://discord.gg/melonmc" target="_blank"><i class="fab fa-discord"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS animations
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            // Ensure we sync announcements first before loading them
+            console.log("Announcements page loaded, syncing announcements...");
+            syncAnnouncements().then(announcements => {
+                console.log(`Synced ${announcements.length} announcements, now loading page view`);
+                // Load announcements with custom settings
+                loadAnnouncementsPage();
+            }).catch(error => {
+                console.error("Error syncing announcements:", error);
+                // Still try to load announcements even if sync fails
+                loadAnnouncementsPage();
+            });
+            
+            // Set up filters
+            const typeFilter = document.getElementById('announcement-type-filter');
+            const searchInput = document.getElementById('announcement-search');
+            const searchBtn = document.getElementById('announcement-search-btn');
+            const loadMoreBtn = document.getElementById('load-more-btn');
+            
+            // Current filter state
+            const filterState = {
+                type: 'all',
+                search: '',
+                page: 1,
+                pageSize: 10
+            };
+            
+            // Apply filters
+            if (typeFilter) {
+                typeFilter.addEventListener('change', function() {
+                    filterState.type = this.value;
+                    filterState.page = 1;
+                    loadAnnouncementsPage(filterState);
+                });
+            }
+            
+            // Apply search
+            if (searchBtn) {
+                searchBtn.addEventListener('click', function() {
+                    if (searchInput) {
+                        filterState.search = searchInput.value.trim().toLowerCase();
+                        filterState.page = 1;
+                        loadAnnouncementsPage(filterState);
+                    }
+                });
+            }
+            
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        filterState.search = searchInput.value.trim().toLowerCase();
+                        filterState.page = 1;
+                        loadAnnouncementsPage(filterState);
+                    }
+                });
+            }
+            
+            // Load more
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', function() {
+                    filterState.page += 1;
+                    loadAnnouncementsPage(filterState, true);
+                });
+            }
+        });
+        
+        /**
+         * Load announcements with filters for the announcements page
+         */
+        async function loadAnnouncementsPage(filters = {}, append = false) {
+            const container = document.getElementById('announcementsContainer');
+            const loadMoreBtn = document.getElementById('load-more-btn');
+            
+            if (!container) return;
+            
+            // Default filters
+            const defaultFilters = {
+                type: 'all',
+                search: '',
+                page: 1,
+                pageSize: 10
+            };
+            
+            // Combine defaults with provided filters
+            const activeFilters = { ...defaultFilters, ...filters };
+            
+            if (!append) {
+                // Show loading spinner
+                container.innerHTML = `
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                        <p>Loading announcements...</p>
+                    </div>
+                `;
+            } else if (loadMoreBtn) {
+                // Show loading state on the button
+                loadMoreBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+                loadMoreBtn.disabled = true;
+            }
+            
+            try {
+                let announcements = [];
+                let firebaseAvailable = false;
+                
+                // Try to load from Firebase if available
+                try {
+                    if (typeof firebase !== 'undefined' && firebase.firestore) {
+                        firebaseAvailable = true;
+                        const db = firebase.firestore();
+                        
+                        // Build query
+                        let query = db.collection('announcements').orderBy('createdAt', 'desc');
+                        
+                        // Apply type filter if not 'all'
+                        if (activeFilters.type !== 'all') {
+                            query = query.where('type', '==', activeFilters.type);
+                        }
+                        
+                        // Apply pagination
+                        const limitSize = activeFilters.page * activeFilters.pageSize;
+                        query = query.limit(limitSize);
+                        
+                        const snapshot = await query.get();
+                            
+                        if (!snapshot.empty) {
+                            snapshot.forEach(doc => {
+                                const data = doc.data();
+                                announcements.push({
+                                    id: doc.id,
+                                    title: data.title,
+                                    content: data.content,
+                                    type: data.type || 'update',
+                                    timestamp: data.createdAt?.toDate() || data.timestamp || new Date()
+                                });
+                            });
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Error loading announcements from Firebase:', error);
+                    firebaseAvailable = false;
+                }
+                
+                // Fall back to localStorage if Firebase is not available or failed
+                if (!firebaseAvailable || announcements.length === 0) {
+                    try {
+                        const savedAnnouncements = localStorage.getItem('announcements');
+                        if (savedAnnouncements) {
+                            let parsedAnnouncements = JSON.parse(savedAnnouncements);
+                            
+                            // Apply type filter
+                            if (activeFilters.type !== 'all') {
+                                parsedAnnouncements = parsedAnnouncements.filter(
+                                    a => a.type === activeFilters.type
+                                );
+                            }
+                            
+                            // Apply pagination
+                            announcements = parsedAnnouncements.slice(0, 
+                                activeFilters.page * activeFilters.pageSize);
+                        }
+                    } catch (error) {
+                        console.warn('Error loading announcements from localStorage:', error);
+                    }
+                }
+                
+                // Apply search filter in memory if needed
+                if (activeFilters.search) {
+                    const searchLower = activeFilters.search.toLowerCase();
+                    announcements = announcements.filter(announcement => 
+                        (announcement.title && announcement.title.toLowerCase().includes(searchLower)) ||
+                        (announcement.content && announcement.content.toLowerCase().includes(searchLower))
+                    );
+                }
+                
+                // Sort announcements by date (newest first)
+                announcements.sort((a, b) => {
+                    const dateA = a.timestamp instanceof Date ? a.timestamp : new Date(a.timestamp);
+                    const dateB = b.timestamp instanceof Date ? b.timestamp : new Date(b.timestamp);
+                    return dateB - dateA;
+                });
+                
+                // Check if we need to show the load more button
+                if (loadMoreBtn) {
+                    if (announcements.length >= activeFilters.page * activeFilters.pageSize) {
+                        loadMoreBtn.style.display = 'block';
+                        loadMoreBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Load More';
+                        loadMoreBtn.disabled = false;
+                    } else {
+                        loadMoreBtn.style.display = 'none';
+                    }
+                }
+                
+                // Render announcements
+                if (append) {
+                    // Get existing announcements and their IDs
+                    const existingIds = Array.from(container.querySelectorAll('.announcement-card'))
+                        .map(card => card.getAttribute('data-id'));
+                    
+                    // Only add announcements that aren't already displayed
+                    renderAnnouncementsPage(
+                        container, 
+                        announcements.filter(a => !existingIds.includes(a.id)),
+                        true
+                    );
+                } else {
+                    renderAnnouncementsPage(container, announcements);
+                }
+                
+            } catch (error) {
+                console.error('Error in loadAnnouncementsPage:', error);
+                
+                if (!append) {
+                    container.innerHTML = `
+                        <div class="announcements-empty">
+                            <p>Unable to load announcements at this time.</p>
+                        </div>
+                    `;
+                }
+                
+                if (loadMoreBtn) {
+                    loadMoreBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Try Again';
+                    loadMoreBtn.disabled = false;
+                }
+            }
+        }
+        
+        /**
+         * Renders announcements on the announcements page
+         */
+        function renderAnnouncementsPage(container, announcements, append = false) {
+            if (!announcements || announcements.length === 0) {
+                if (!append) {
+                    container.innerHTML = `
+                        <div class="announcements-empty">
+                            <p>No announcements available at this time.</p>
+                        </div>
+                    `;
+                }
+                return;
+            }
+            
+            // Clear container if not appending
+            if (!append) {
+                container.innerHTML = '';
+            }
+            
+            // Add each announcement
+            announcements.forEach((announcement, index) => {
+                const date = announcement.timestamp instanceof Date 
+                    ? announcement.timestamp 
+                    : new Date(announcement.timestamp);
+                
+                const formattedDate = date.toLocaleDateString();
+                const formattedTime = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                
+                const card = document.createElement('div');
+                card.className = 'announcement-card';
+                card.setAttribute('data-aos', 'fade-up');
+                card.setAttribute('data-aos-delay', ((index % 5) * 100).toString());
+                card.setAttribute('data-id', announcement.id);
+                card.setAttribute('data-type', announcement.type || 'update');
+                
+                card.innerHTML = `
+                    <div class="announcement-type ${announcement.type || 'update'}">${announcement.type || 'update'}</div>
+                    <div class="announcement-content">
+                        <h3>${announcement.title || 'Untitled Announcement'}</h3>
+                        <p>${announcement.content || ''}</p>
+                        <div class="announcement-meta">
+                            <span>Posted on ${formattedDate} at ${formattedTime}</span>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+            
+            // Refresh AOS animations
+            if (typeof AOS !== 'undefined') {
+                AOS.refresh();
+            }
+        }
+
+        // Add debug code right after the opening body tag
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Announcements page loaded, checking for announcements...");
+            console.log("Looking for announcements in:", window.location.origin + '/announcements/announcements.json');
+            
+            // Force the announcement sync immediately
+            if (typeof syncAnnouncements === 'function') {
+                console.log("Manually triggering syncAnnouncements()");
+                syncAnnouncements().then(announcements => {
+                    console.log("Manual sync complete, found announcements:", announcements ? announcements.length : 0);
+                    if (announcements && announcements.length > 0) {
+                        console.log("First announcement:", announcements[0]);
+                    }
+                }).catch(err => {
+                    console.error("Error in manual sync:", err);
+                });
+            } else {
+                console.error("syncAnnouncements function not available!");
+            }
+        });
+    </script>
+</body>
+</html> 

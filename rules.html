@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MelonMC - Server Rules</title>
+    <meta name="description" content="Official rules and guidelines for the MelonMC Minecraft server.">
+    <meta name="keywords" content="MelonMC, Minecraft, server rules, community guidelines">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Minecraft:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Vercel Analytics -->
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+    <!-- Login Overlay -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-container">
+            <img src="assets/logo.png" alt="MelonMC Logo" class="login-logo">
+            <h2>Welcome to MelonMC</h2>
+            <p>Enter your Minecraft gamertag to continue</p>
+            <form class="login-form" id="loginForm">
+                <input type="text" id="gamertag" placeholder="Your Minecraft Gamertag" required>
+                <button type="submit" class="button premium-button">
+                    <span class="button-glow"></span>
+                    Let's Play!
+                    <div class="button-shine"></div>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar navbar-scrolled">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img src="assets/logo.png" alt="MelonMC Logo">
+                </a>
+                <div class="nav-buttons">
+                    <!-- User welcome message - hidden by default -->
+                    <div class="user-welcome" id="userWelcome" style="display:none;">
+                        <span>Welcome to MelonMC, <span id="userGamertag"></span>!</span>
+                        <button id="logoutButton"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                    </div>
+                    <a href="index.html" class="nav-button"><i class="fas fa-home"></i> Home</a>
+                    <a href="index.html#server-info" class="nav-button"><i class="fas fa-server"></i> Info</a>
+                    <a href="index.html#features" class="nav-button"><i class="fas fa-gamepad"></i> Features</a>
+                    <a href="index.html#ranks" class="nav-button"><i class="fas fa-crown"></i> Ranks</a>
+                    <a href="rules.html" class="nav-button active"><i class="fas fa-gavel"></i> Rules</a>
+                    <a href="index.html#join" class="nav-button"><i class="fas fa-sign-in-alt"></i> Join</a>
+                    <a href="https://discord.gg/melonmc" target="_blank" class="nav-button discord-btn"><i class="fab fa-discord"></i> Discord</a>
+                </div>
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-title bg-accent-gradient">
+        <div class="container">
+            <h1 class="section-title glow-on-hover" data-text="Server Rules">Server Rules</h1>
+            <div class="section-divider"></div>
+            <p class="subtitle">Follow these guidelines to ensure a fun and fair experience for everyone</p>
+        </div>
+        <div class="hero-shape-divider">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Rules Content -->
+    <section class="rules-content">
+        <div class="container">
+            <div class="rules-container" data-aos="fade-up">
+                <div class="rules-category">
+                    <h2><i class="fas fa-comments"></i> Chat Rules</h2>
+                    <ul class="rules-list">
+                        <li data-aos="fade-up" data-aos-delay="100">
+                            <h3>No Harassment</h3>
+                            <p>Respect all players. Harassment, discrimination, or bullying based on race, gender, sexual orientation, religion, or any other factor will not be tolerated.</p>
+                        </li>
+                        <li data-aos="fade-up" data-aos-delay="150">
+                            <h3>No Spamming</h3>
+                            <p>Avoid excessive messaging, caps, symbols, or repetitive text that clutters the chat.</p>
+                        </li>
+                        <li data-aos="fade-up" data-aos-delay="200">
+                            <h3>No Advertising</h3>
+                            <p>Do not advertise other servers, websites, or services. Discord links are only permitted if directly related to your MelonMC gameplay.</p>
+                        </li>
+                        <li data-aos="fade-up" data-aos-delay="250">
+                            <h3>Appropriate Language</h3>
+                            <p>Keep conversations family-friendly. Excessive swearing, inappropriate topics, or adult content is prohibited.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="rules-category" data-aos="fade-up">
+                    <h2><i class="fas fa-gamepad"></i> Gameplay Rules</h2>
+                    <ul class="rules-list">
+                        <li data-aos="fade-up" data-aos-delay="100">
+                            <h3>No Cheating</h3>
+                            <p>Using hacked clients, mods that give unfair advantages, exploits, or any other form of cheating is strictly prohibited and will result in a ban.</p>
+                        </li>
+                        <li data-aos="fade-up" data-aos-delay="150">
+                            <h3>No Griefing</h3>
+                            <p>Intentionally destroying or altering other players' builds without permission is forbidden. Respect other players' creations and property.</p>
+                        </li>
+                        <li data-aos="fade-up" data-aos-delay="200">
+                            <h3>No Lag Machines</h3>
+                            <p>Intentionally creating devices or structures designed to cause server lag is prohibited and may result in a permanent ban.</p>
+                        </li>
+                        <li data-aos="fade-up" data-aos-delay="250">
+                            <h3>Appropriate Builds</h3>
+                            <p>All structures must be appropriate. Offensive or inappropriate builds will be removed, and the builder may face consequences.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="rules-category" data-aos="fade-up">
+                    <h2><i class="fas fa-user-shield"></i> Account Rules</h2>
+                    <ul class="rules-list">
+                        <li data-aos="fade-up" data-aos-delay="100">
+                            <h3>One Account Per Player</h3>
+                            <p>Alt accounts used to bypass bans or gain unfair advantages are not allowed.</p>
+                        </li>
+                        <li data-aos="fade-up" data-aos-delay="150">
+                            <h3>Appropriate Usernames</h3>
+                            <p>Usernames must be appropriate and not offensive. Staff may ask you to change your name if deemed inappropriate.</p>
+                        </li>
+                        <li data-aos="fade-up" data-aos-delay="200">
+                            <h3>Account Security</h3>
+                            <p>You are responsible for securing your account. Actions taken by others using your account are your responsibility.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="rules-category" data-aos="fade-up">
+                    <h2><i class="fas fa-balance-scale"></i> Trading & Economy</h2>
+                    <ul class="rules-list">
+                        <li data-aos="fade-up" data-aos-delay="100">
+                            <h3>No Scamming</h3>
+                            <p>Dishonest trading, scamming other players, or failing to fulfill agreed-upon exchanges is prohibited.</p>
+                        </li>
+                        <li data-aos="fade-up" data-aos-delay="150">
+                            <h3>No Real Money Trading</h3>
+                            <p>Trading in-game items, currency, or services for real money is strictly forbidden.</p>
+                        </li>
+                        <li data-aos="fade-up" data-aos-delay="200">
+                            <h3>Fair Trading</h3>
+                            <p>Price gouging or market manipulation tactics that harm the server economy may be addressed by staff.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="rules-note glass-effect" data-aos="fade-up">
+                    <h3><i class="fas fa-exclamation-circle"></i> Important Notes</h3>
+                    <ul>
+                        <li>Staff has final say in all rule interpretations and enforcement.</li>
+                        <li>Rules may be updated at any time. Check back regularly for changes.</li>
+                        <li>Ignorance of rules is not an excuse for violations.</li>
+                        <li>Report rule violations to staff through Discord or in-game using <code>/report</code>.</li>
+                        <li>Penalties range from warnings to temporary or permanent bans depending on the severity and frequency of violations.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appeal Process -->
+    <section class="appeals bg-accent-gradient">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title glow-on-hover" data-text="Appeals">Appeals Process</h2>
+                <div class="section-divider"></div>
+                <p class="section-description">Believe a moderation action was incorrect? Here's what to do</p>
+            </div>
+            
+            <div class="appeals-process" data-aos="fade-up" data-aos-delay="100">
+                <div class="appeal-step glass-effect" data-aos="fade-up" data-aos-delay="150">
+                    <div class="step-number">1</div>
+                    <h3>Wait 24 Hours</h3>
+                    <p>Before appealing, take 24 hours to reflect on the situation and understand the rule that was violated.</p>
+                </div>
+                
+                <div class="appeal-step glass-effect" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">2</div>
+                    <h3>Join Discord</h3>
+                    <p>Join our <a href="https://discord.gg/melonmc" target="_blank">Discord server</a> if you haven't already.</p>
+                </div>
+                
+                <div class="appeal-step glass-effect" data-aos="fade-up" data-aos-delay="250">
+                    <div class="step-number">3</div>
+                    <h3>Submit Appeal</h3>
+                    <p>Use the #appeals channel and follow the format provided in the pinned message.</p>
+                </div>
+                
+                <div class="appeal-step glass-effect" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number">4</div>
+                    <h3>Be Patient</h3>
+                    <p>Appeals are reviewed by staff members and may take up to 72 hours to process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Staff Contact -->
+    <section class="staff-contact">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title glow-on-hover" data-text="Contact Staff">Contact Staff</h2>
+                <div class="section-divider"></div>
+                <p class="section-description">Need help with a rule or want to report a violation?</p>
+            </div>
+            
+            <div class="contact-methods" data-aos="fade-up" data-aos-delay="100">
+                <div class="contact-method glass-effect" data-aos="fade-up" data-aos-delay="150">
+                    <i class="fas fa-gamepad"></i>
+                    <h3>In-Game</h3>
+                    <p>Make ticket and contact staff in discord</p>
+                </div>
+                
+                <div class="contact-method glass-effect" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fab fa-discord"></i>
+                    <h3>Discord</h3>
+                    <p>Join our Discord server and use the #support channel</p>
+                    <a href="https://discord.gg/melonmc" target="_blank" class="button">Join Discord</a>
+                </div>
+                
+                <div class="contact-method glass-effect" data-aos="fade-up" data-aos-delay="250">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>For serious issues, contact us directly at:</p>
+                    <a href="mailto:staff@melonmc.com" class="email-link">staff@melonmc.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column" data-aos="fade-up" data-aos-delay="100">
+                    <div class="footer-logo">
+                        <img src="assets/logo.png" alt="MelonMC Logo">
+                    </div>
+                    <p>The ultimate Minecraft server experience with premium gameplay, unique features, and an amazing community.</p>
+                </div>
+                
+                <div class="footer-column" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="index.html#features">Features</a>
+                        <a href="index.html#ranks">Ranks</a>
+                        <a href="index.html#join">Join</a>
+                        <a href="https://store.melonmc.com" target="_blank">Store</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Legal</h3>
+                    <div class="footer-links">
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="refund.html">Refund Policy</a>
+                        <a href="rules.html">Server Rules</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column" data-aos="fade-up" data-aos-delay="400">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on events and offers.</p>
+                    <form name="newsletter" method="POST" action="/api/subscribe" class="newsletter-form">
+                        <input type="email" name="email" placeholder="Your email address" required class="newsletter-input">
+                        <button type="submit" class="button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <div class="netlify-badge">
+                        <a href="https://vercel.com" target="_blank">
+                            <img src="https://images.ctfassets.net/e5382hct74si/78Olo8EZRdUlcDUFQvnzG7/fa4cdb6dc04c40fceac194134788a0e2/1618983297-powered-by-vercel.svg" alt="Powered by Vercel" height="32">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2023 MelonMC. All rights reserved.</p>
+                <p class="disclaimer">Not affiliated with Mojang AB.</p>
+            </div>
+        </div>
+
+        <a href="admin/" class="admin-link" style="font-size: 0; position: fixed; bottom: 5px; right: 5px; opacity: 0.05; width: 10px; height: 10px; border-radius: 50%; background: transparent; overflow: hidden; z-index: 1000; text-decoration: none;">
+            Admin
+        </a>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="script.js"></script>
+    <!-- Login System Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if the user is logged in
+        function checkLogin() {
+            const gamertag = localStorage.getItem('gamertag');
+            if (gamertag) {
+                // User is logged in
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('userWelcome').style.display = 'flex';
+                document.getElementById('userGamertag').textContent = gamertag;
+                showLoginNotification(gamertag);
+            } else {
+                // User is not logged in
+                document.getElementById('loginOverlay').style.display = 'flex';
+                document.getElementById('userWelcome').style.display = 'none';
+            }
+        }
+
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const gamertag = document.getElementById('gamertag').value.trim();
+            if (gamertag) {
+                localStorage.setItem('gamertag', gamertag);
+                
+                // Special admin access check
+                if (gamertag === "Biltubhaiandharshbhaiophai123") {
+                    window.location.href = "admin/index.html";
+                    return;
+                }
+                
+                checkLogin();
+            }
+        });
+
+        // Handle logout
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            localStorage.removeItem('gamertag');
+            checkLogin();
+        });
+
+        // Show login notification
+        function showLoginNotification(gamertag) {
+            // Remove any existing notification
+            const existingNotification = document.querySelector('.login-notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+
+            // Create and show new notification
+            const notification = document.createElement('div');
+            notification.className = 'login-notification';
+            notification.innerHTML = `<i class="fas fa-check-circle"></i> Welcome, ${gamertag}!`;
+            document.body.appendChild(notification);
+            
+            // Show the notification with animation
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Hide and remove the notification after 5 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 500);
+            }, 5000);
+        }
+
+        // Check login status when page loads
+        checkLogin();
+        
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    });
+    </script>
+</body>
+</html> 

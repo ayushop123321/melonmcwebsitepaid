@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0c12" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#1a1e2e" stop-opacity="0.9" />
+    </linearGradient>
+    
+    <!-- Pixel pattern -->
+    <pattern id="pixelPattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="25" height="25" fill="#ff9d00" fill-opacity="0.03" />
+      <rect x="25" y="25" width="25" height="25" fill="#ff9d00" fill-opacity="0.03" />
+    </pattern>
+    
+    <!-- Subtle grid pattern -->
+    <pattern id="gridPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="100" y2="0" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+      <line x1="0" y1="0" x2="0" y2="100" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+    </pattern>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="1000" height="1000" fill="url(#heroGradient)" />
+  
+  <!-- Overlay patterns -->
+  <rect width="1000" height="1000" fill="url(#pixelPattern)" />
+  <rect width="1000" height="1000" fill="url(#gridPattern)" />
+  
+  <!-- Decorative elements -->
+  <circle cx="200" cy="200" r="100" fill="rgba(140,82,255,0.05)" />
+  <circle cx="800" cy="800" r="150" fill="rgba(255,157,0,0.05)" />
+  
+  <!-- Subtle diagonal lines -->
+  <line x1="0" y1="0" x2="1000" y2="1000" stroke="rgba(255,255,255,0.02)" stroke-width="2" />
+  <line x1="1000" y1="0" x2="0" y2="1000" stroke="rgba(255,255,255,0.02)" stroke-width="2" />
+</svg> 

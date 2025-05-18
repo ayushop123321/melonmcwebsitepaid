@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Ranks - MelonMC 🍉</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .rank-list {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .rank-row {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .rank-row:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary-color);
+        }
+        
+        .rank-icon {
+            width: 80px;
+            height: 80px;
+            margin-right: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-darker);
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .rank-icon img {
+            max-width: 70%;
+            max-height: 70%;
+        }
+        
+        .rank-details {
+            flex: 1;
+        }
+        
+        .rank-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .rank-perks {
+            font-size: 0.9rem;
+            color: var(--text-faded);
+            margin-bottom: 0.5rem;
+        }
+        
+        .rank-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-align: right;
+            margin: 0 2rem;
+        }
+        
+        .rank-action {
+            width: 120px;
+        }
+        
+        .buy-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--bg-darker);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        
+        .buy-button:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .category-header {
+            background-color: var(--bg-darker);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .category-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .category-header p {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .view-toggle {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .view-toggle a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            background-color: var(--bg-light);
+            border-radius: 4px;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .view-toggle a:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-darker);
+        }
+        
+        .view-toggle a.active {
+            background-color: var(--primary-color);
+            color: var(--bg-darker);
+        }
+        
+        @media (max-width: 768px) {
+            .rank-row {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+            
+            .rank-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .rank-price {
+                margin: 1rem 0;
+                text-align: center;
+            }
+            
+            .rank-action {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/logo.png" alt="MelonMC Logo">
+                </a>
+            </div>
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-button home-btn">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="https://discord.gg/7fKJwXnQrB" class="nav-button discord-btn" target="_blank">
+                    <i class="fab fa-discord"></i> Discord
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="category-header">
+        <h1>Player Ranks</h1>
+        <p>Upgrade your experience with exclusive ranks and perks!</p>
+        <p>Choose from our selection of premium ranks to enhance your gameplay.</p>
+    </section>
+    
+    <div class="view-toggle">
+        <a href="player-ranks.html">Card View</a>
+        <a href="player-ranks-list.html" class="active">List View</a>
+    </div>
+
+    <section class="rank-list">
+        <div class="rank-row">
+            <div class="rank-icon">
+                <img src="assets/ranks/eternal-rank.png" alt="Eternal Rank">
+            </div>
+            <div class="rank-details">
+                <div class="rank-name">Eternal Rank</div>
+                <div class="rank-perks">
+                    Access to /fly command • Exclusive Eternal prefix • Colored chat & custom prefix • 6 home locations • Access to all exclusive kits • Priority server access • Special cosmetic effects
+                </div>
+            </div>
+            <div class="rank-price">749rs</div>
+            <div class="rank-action">
+                <a href="#payment" class="buy-button">Buy Now</a>
+            </div>
+        </div>
+        
+        <div class="rank-row">
+            <div class="rank-icon">
+                <img src="assets/ranks/immortal-rank.png" alt="Immortal Rank">
+            </div>
+            <div class="rank-details">
+                <div class="rank-name">Immortal Rank</div>
+                <div class="rank-perks">
+                    Access to /fly command • Immortal prefix • Colored chat & custom prefix • 5 home locations • Access to premium kits • Priority server access
+                </div>
+            </div>
+            <div class="rank-price">699rs</div>
+            <div class="rank-action">
+                <a href="#payment" class="buy-button">Buy Now</a>
+            </div>
+        </div>
+        
+        <div class="rank-row">
+            <div class="rank-icon">
+                <img src="assets/ranks/knight-rank.png" alt="Knight Rank">
+            </div>
+            <div class="rank-details">
+                <div class="rank-name">Knight Rank</div>
+                <div class="rank-perks">
+                    Access to /fly command • Knight prefix • Colored chat • 4 home locations • Access to exclusive kits • Priority server access
+                </div>
+            </div>
+            <div class="rank-price">599rs</div>
+            <div class="rank-action">
+                <a href="#payment" class="buy-button">Buy Now</a>
+            </div>
+        </div>
+        
+        <div class="rank-row">
+            <div class="rank-icon">
+                <img src="assets/ranks/lord-rank.png" alt="Lord Rank">
+            </div>
+            <div class="rank-details">
+                <div class="rank-name">Lord Rank</div>
+                <div class="rank-perks">
+                    Access to /fly in specific areas • Lord prefix • Colored nickname • 3 home locations • Access to special kits
+                </div>
+            </div>
+            <div class="rank-price">499rs</div>
+            <div class="rank-action">
+                <a href="#payment" class="buy-button">Buy Now</a>
+            </div>
+        </div>
+        
+        <div class="rank-row">
+            <div class="rank-icon">
+                <img src="assets/ranks/lady-rank.png" alt="Lady Rank">
+            </div>
+            <div class="rank-details">
+                <div class="rank-name">Lady Rank</div>
+                <div class="rank-perks">
+                    Access to /fly in spawn • Lady prefix • Colored nickname • 2 home locations • Access to basic kits
+                </div>
+            </div>
+            <div class="rank-price">399rs</div>
+            <div class="rank-action">
+                <a href="#payment" class="buy-button">Buy Now</a>
+            </div>
+        </div>
+        
+        <div class="rank-row">
+            <div class="rank-icon">
+                <img src="assets/ranks/duke-rank.png" alt="Duke Rank">
+            </div>
+            <div class="rank-details">
+                <div class="rank-name">Duke Rank</div>
+                <div class="rank-perks">
+                    Duke prefix • Colored nickname • 2 home locations • Access to starter kits • Extended playtime rewards
+                </div>
+            </div>
+            <div class="rank-price">199rs</div>
+            <div class="rank-action">
+                <a href="#payment" class="buy-button">Buy Now</a>
+            </div>
+        </div>
+        
+        <div class="rank-row">
+            <div class="rank-icon">
+                <img src="assets/ranks/duchess-rank.png" alt="Duchess Rank">
+            </div>
+            <div class="rank-details">
+                <div class="rank-name">Duchess Rank</div>
+                <div class="rank-perks">
+                    Duchess prefix • 1 home location • Access to basic features • Daily rewards
+                </div>
+            </div>
+            <div class="rank-price">99rs</div>
+            <div class="rank-action">
+                <a href="#payment" class="buy-button">Buy Now</a>
+            </div>
+        </div>
+        
+        <div class="rank-row">
+            <div class="rank-icon">
+                <img src="assets/ranks/vip-plus-rank.png" alt="VIP+ Rank">
+            </div>
+            <div class="rank-details">
+                <div class="rank-name">VIP+ Rank</div>
+                <div class="rank-perks">
+                    VIP+ prefix • 1 home location • Basic perks • Starter kit
+                </div>
+            </div>
+            <div class="rank-price">59rs</div>
+            <div class="rank-action">
+                <a href="#payment" class="buy-button">Buy Now</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="payment" class="payment-info">
+        <h2>Payment Information</h2>
+        <div class="qr-code">
+            <img src="assets/qr-code.png" alt="UPI QR Code">
+        </div>
+        <div class="payment-instructions">
+            <h3>How to Purchase:</h3>
+            <ol>
+                <li>Scan the QR code or pay to the UPI ID shown above.</li>
+                <li>After payment, join our <a href="https://discord.gg/7fKJwXnQrB" target="_blank">Discord Server</a>.</li>
+                <li>Share your payment screenshot with your Minecraft username.</li>
+                <li>An admin will verify your payment and add your rank to your account.</li>
+                <li>Log into the server and enjoy your new rank!</li>
+            </ol>
+            <p><strong>Note:</strong> Please keep your payment proof ready. It may take up to 20 minutes for your rank to be activated after verification.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="copyright">
+            <p>Copyright © MelonMC 2023. All Rights Reserved.</p>
+            <p>We are not affiliated with Mojang AB.</p>
+        </div>
+        <div class="footer-links">
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+        <div class="disclaimer">
+            <p>This website and its checkout process is owned & operated by MelonMC. We fully provide billing support and refunds.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

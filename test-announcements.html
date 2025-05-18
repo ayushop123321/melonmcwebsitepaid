@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MelonMC - Test Announcements</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(30, 30, 30, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .test-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: rgba(50, 50, 50, 0.6);
+            border-radius: 8px;
+        }
+        
+        .test-section h2 {
+            margin-top: 0;
+            color: #7FFF00;
+        }
+        
+        pre {
+            background-color: rgba(20, 20, 20, 0.7);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            color: #DDD;
+        }
+        
+        button {
+            background-color: #7FFF00;
+            color: #111;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        button:hover {
+            background-color: #6AE000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="index.html">MelonMC</a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="announcements.html">Announcements</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="server-info.html">Server Info</a></li>
+                    <li><a href="player-ranks.html">Player Ranks</a></li>
+                    <li><a href="rules.html">Rules</a></li>
+                </ul>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Test Announcements</h1>
+            <p>Testing announcement loading and display functionality</p>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <div class="test-section">
+            <h2>Announcements Loading Tests</h2>
+            <p>Click the buttons below to test different aspects of the announcements system:</p>
+            
+            <button id="loadAnnouncementsBtn">Load Announcements</button>
+            <button id="checkLocalStorageBtn">Check localStorage</button>
+            <button id="checkJsonFileBtn">Check JSON File</button>
+            <button id="clearConsoleBtn">Clear Console</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>Announcements Display</h2>
+            <div id="announcementsContainer"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Debug Output</h2>
+            <pre id="debugOutput">Loading...</pre>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Debug console output
+        const originalConsoleLog = console.log;
+        const originalConsoleError = console.error;
+        const originalConsoleWarn = console.warn;
+        
+        const debugOutput = document.getElementById('debugOutput');
+        
+        function appendToDebug(message, type = 'log') {
+            const timestamp = new Date().toLocaleTimeString();
+            const formatted = `[${timestamp}] [${type}] ${message}\n`;
+            debugOutput.textContent += formatted;
+            debugOutput.scrollTop = debugOutput.scrollHeight;
+        }
+        
+        console.log = function(...args) {
+            originalConsoleLog.apply(console, args);
+            appendToDebug(args.join(' '));
+        };
+        
+        console.error = function(...args) {
+            originalConsoleError.apply(console, args);
+            appendToDebug(args.join(' '), 'error');
+        };
+        
+        console.warn = function(...args) {
+            originalConsoleWarn.apply(console, args);
+            appendToDebug(args.join(' '), 'warn');
+        };
+        
+        // Clear debug output
+        document.getElementById('clearConsoleBtn').addEventListener('click', () => {
+            debugOutput.textContent = 'Console cleared.\n';
+        });
+        
+        // Load announcements
+        document.getElementById('loadAnnouncementsBtn').addEventListener('click', () => {
+            debugOutput.textContent = 'Loading announcements...\n';
+            loadAnnouncements();
+        });
+        
+        // Check localStorage
+        document.getElementById('checkLocalStorageBtn').addEventListener('click', () => {
+            const savedAnnouncements = localStorage.getItem('announcements');
+            if (savedAnnouncements) {
+                const parsed = JSON.parse(savedAnnouncements);
+                console.log(`Found ${parsed.length} announcements in localStorage`);
+                
+                if (parsed.length > 0) {
+                    console.log(`First announcement: ${parsed[0].title}`);
+                }
+            } else {
+                console.log('No announcements found in localStorage');
+            }
+        });
+        
+        // Check JSON file
+        document.getElementById('checkJsonFileBtn').addEventListener('click', async () => {
+            try {
+                console.log("Checking JSON file...");
+                const response = await fetch('/announcements/announcements.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log(`Loaded ${data.length} announcements from JSON file`);
+                    
+                    if (data.length > 0) {
+                        console.log(`First announcement: ${data[0].title}`);
+                    }
+                } else {
+                    console.error(`Failed to load JSON file: ${response.status} ${response.statusText}`);
+                }
+            } catch (error) {
+                console.error('Error checking JSON file:', error);
+            }
+        });
+        
+        // Initialize
+        debugOutput.textContent = 'Test page loaded. Click buttons to run tests.\n';
+    </script>
+</body>
+</html> 

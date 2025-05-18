@@ -1,0 +1,15 @@
+# Redirects for Netlify
+
+# Fallback for single page application (SPA)
+/*  /index.html  200
+
+# Admin panel should not redirect to index.html
+/admin/*  /admin/index.html  200
+
+# Bypass redirects for static files
+/*.css   /:splat   200
+/*.js    /:splat   200
+/*.png   /:splat   200
+/*.jpg   /:splat   200
+/*.svg   /:splat   200
+/*.ico   /:splat   200 

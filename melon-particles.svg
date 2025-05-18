@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <!-- Melon Seed -->
+  <path d="M20,15 Q23,20 20,25 Q17,20 20,15" fill="rgba(40,40,40,0.6)" />
+  
+  <!-- Melon Slice Corner -->
+  <path d="M5,5 Q15,0 15,15 Q0,15 5,5" fill="rgba(255,90,60,0.3)" />
+  
+  <!-- Green Rind -->
+  <path d="M0,0 L15,0 L15,3 Q0,3 0,0" fill="rgba(100,220,50,0.2)" />
+</svg> 

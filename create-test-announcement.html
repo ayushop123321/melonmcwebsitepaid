@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Test Announcement - MelonMC</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            min-height: 100px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .notification {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .announcements {
+            margin-top: 30px;
+        }
+        .announcement {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .announcement h3 {
+            margin-top: 0;
+        }
+        .announcement-meta {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .announcement-type {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .update {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .critical {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create Test Announcement</h1>
+    <p>This tool allows you to create test announcements directly in localStorage for testing purposes.</p>
+    
+    <div id="notification" class="notification"></div>
+    
+    <form id="announcementForm">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" required placeholder="Enter announcement title">
+        </div>
+        
+        <div class="form-group">
+            <label for="content">Content:</label>
+            <textarea id="content" required placeholder="Enter announcement content"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="type">Type:</label>
+            <select id="type">
+                <option value="update">Update</option>
+                <option value="warning">Warning</option>
+                <option value="critical">Critical</option>
+            </select>
+        </div>
+        
+        <div class="buttons">
+            <button type="submit">Create Announcement</button>
+            <button type="button" id="viewButton">View Announcements</button>
+            <button type="button" id="testButton" style="background-color: #007bff;">Test Website Display</button>
+            <button type="button" id="clearButton" style="background-color: #dc3545;">Clear All</button>
+        </div>
+    </form>
+    
+    <div id="announcements" class="announcements" style="display: none;"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('announcementForm');
+            const notification = document.getElementById('notification');
+            const announcementsContainer = document.getElementById('announcements');
+            const viewButton = document.getElementById('viewButton');
+            const clearButton = document.getElementById('clearButton');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const title = document.getElementById('title').value.trim();
+                const content = document.getElementById('content').value.trim();
+                const type = document.getElementById('type').value;
+                
+                if (!title || !content) {
+                    showNotification('Please fill out all required fields', 'error');
+                    return;
+                }
+                
+                createAnnouncement(title, content, type);
+            });
+            
+            viewButton.addEventListener('click', function() {
+                const isVisible = announcementsContainer.style.display !== 'none';
+                announcementsContainer.style.display = isVisible ? 'none' : 'block';
+                viewButton.textContent = isVisible ? 'View Announcements' : 'Hide Announcements';
+                
+                if (!isVisible) {
+                    displayAnnouncements();
+                }
+            });
+            
+            clearButton.addEventListener('click', function() {
+                if (confirm('Are you sure you want to delete all announcements from localStorage?')) {
+                    localStorage.removeItem('announcements');
+                    showNotification('All announcements cleared from localStorage', 'success');
+                    announcementsContainer.innerHTML = '';
+                }
+            });
+            
+            function createAnnouncement(title, content, type) {
+                try {
+                    // Generate a unique ID
+                    const id = 'announcement_' + Date.now();
+                    const timestamp = new Date().toISOString();
+                    
+                    // Create announcement object
+                    const newAnnouncement = {
+                        id,
+                        title,
+                        content,
+                        type,
+                        timestamp,
+                        createdBy: 'test-tool'
+                    };
+                    
+                    // Save to localStorage
+                    const announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
+                    announcements.unshift(newAnnouncement);
+                    localStorage.setItem('announcements', JSON.stringify(announcements));
+                    
+                    // Clear form
+                    form.reset();
+                    
+                    // Show success message
+                    showNotification('Announcement created successfully!', 'success');
+                    
+                    // Update displayed announcements if visible
+                    if (announcementsContainer.style.display !== 'none') {
+                        displayAnnouncements();
+                    }
+                    
+                } catch (error) {
+                    console.error('Error creating announcement:', error);
+                    showNotification('Error creating announcement: ' + error.message, 'error');
+                }
+            }
+            
+            function displayAnnouncements() {
+                try {
+                    const announcements = JSON.parse(localStorage.getItem('announcements') || '[]');
+                    
+                    if (announcements.length === 0) {
+                        announcementsContainer.innerHTML = '<p>No announcements found in localStorage.</p>';
+                        return;
+                    }
+                    
+                    announcementsContainer.innerHTML = '';
+                    
+                    announcements.forEach(announcement => {
+                        const date = new Date(announcement.timestamp);
+                        const formattedDate = date.toLocaleDateString();
+                        const formattedTime = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                        
+                        const element = document.createElement('div');
+                        element.className = 'announcement';
+                        element.innerHTML = `
+                            <span class="announcement-type ${announcement.type}">${announcement.type}</span>
+                            <h3>${announcement.title}</h3>
+                            <p>${announcement.content}</p>
+                            <div class="announcement-meta">
+                                <span>ID: ${announcement.id}</span><br>
+                                <span>Created: ${formattedDate} at ${formattedTime}</span><br>
+                                <span>By: ${announcement.createdBy}</span>
+                            </div>
+                        `;
+                        
+                        announcementsContainer.appendChild(element);
+                    });
+                    
+                } catch (error) {
+                    console.error('Error displaying announcements:', error);
+                    announcementsContainer.innerHTML = '<p>Error loading announcements: ' + error.message + '</p>';
+                }
+            }
+            
+            function showNotification(message, type) {
+                notification.textContent = message;
+                notification.className = 'notification ' + type;
+                notification.style.display = 'block';
+                
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 5000);
+            }
+            
+            // Add event listener for test button
+            const testButton = document.getElementById('testButton');
+            if (testButton) {
+                testButton.addEventListener('click', function() {
+                    // First create a sync message
+                    try {
+                        // Create a simple object to inform main site to sync immediately
+                        const syncMessage = {
+                            action: 'sync_announcements',
+                            timestamp: new Date().toISOString()
+                        };
+                        localStorage.setItem('announcement_sync_trigger', JSON.stringify(syncMessage));
+                        
+                        // Open homepage in a new tab
+                        window.open('../index.html', '_blank');
+                        
+                        showNotification('Opening homepage in a new tab. Announcements should be synced automatically.', 'success');
+                    } catch (error) {
+                        console.error('Error setting sync trigger:', error);
+                        showNotification('Error opening test page: ' + error.message, 'error');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coins [LifeSteal] - MelonMC 🍉</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .product-card {
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary-color);
+        }
+        
+        .product-image {
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-darker);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            max-width: 100%;
+            max-height: 180px;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .add-to-cart {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--bg-darker);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        
+        .add-to-cart:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .category-header {
+            background-color: var(--bg-darker);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .category-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .category-header p {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .payment-info {
+            background-color: var(--bg-darker);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            margin-top: 2rem;
+        }
+        
+        .payment-info h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .qr-code {
+            max-width: 200px;
+            margin: 0 auto 1rem;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 8px;
+        }
+        
+        .qr-code img {
+            width: 100%;
+        }
+        
+        .payment-instructions {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        
+        .payment-instructions ol {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .payment-instructions li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/logo.png" alt="MelonMC Logo">
+                </a>
+            </div>
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-button home-btn">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="https://discord.gg/7fKJwXnQrB" class="nav-button discord-btn" target="_blank">
+                    <i class="fab fa-discord"></i> Discord
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="category-header">
+        <h1>Coins [LifeSteal]</h1>
+        <p>Get yourself some coins to get awesome keys & perks from coinshop.</p>
+        <p>Note: You will receive these coins in LifeSteal Gamemode.</p>
+    </section>
+
+    <section class="product-grid">
+        <div class="product-card">
+            <div class="product-image">
+                <img src="assets/coins/10000-coins.png" alt="10000 Coins">
+            </div>
+            <div class="product-info">
+                <h3 class="product-title">10000 Coins [LIFESTEAL]</h3>
+                <p class="product-price">₹499 INR</p>
+                <a href="#payment" class="add-to-cart">Add to cart</a>
+            </div>
+        </div>
+        
+        <div class="product-card">
+            <div class="product-image">
+                <img src="assets/coins/5000-coins.png" alt="5000 Coins">
+            </div>
+            <div class="product-info">
+                <h3 class="product-title">5000 Coins [LIFESTEAL]</h3>
+                <p class="product-price">₹299 INR</p>
+                <a href="#payment" class="add-to-cart">Add to cart</a>
+            </div>
+        </div>
+        
+        <div class="product-card">
+            <div class="product-image">
+                <img src="assets/coins/3000-coins.png" alt="3000 Coins">
+            </div>
+            <div class="product-info">
+                <h3 class="product-title">3000 Coins [LIFESTEAL]</h3>
+                <p class="product-price">₹199 INR</p>
+                <a href="#payment" class="add-to-cart">Add to cart</a>
+            </div>
+        </div>
+        
+        <div class="product-card">
+            <div class="product-image">
+                <img src="assets/coins/1000-coins.png" alt="1000 Coins">
+            </div>
+            <div class="product-info">
+                <h3 class="product-title">1000 Coins [LIFESTEAL]</h3>
+                <p class="product-price">₹99 INR</p>
+                <a href="#payment" class="add-to-cart">Add to cart</a>
+            </div>
+        </div>
+        
+        <div class="product-card">
+            <div class="product-image">
+                <img src="assets/coins/500-coins.png" alt="500 Coins">
+            </div>
+            <div class="product-info">
+                <h3 class="product-title">500 Coins [LIFESTEAL]</h3>
+                <p class="product-price">₹59 INR</p>
+                <a href="#payment" class="add-to-cart">Add to cart</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="payment" class="payment-info">
+        <h2>Payment Information</h2>
+        <div class="qr-code">
+            <img src="assets/qr-code.png" alt="UPI QR Code">
+        </div>
+        <div class="payment-instructions">
+            <h3>How to Purchase:</h3>
+            <ol>
+                <li>Scan the QR code or pay to the UPI ID shown above.</li>
+                <li>After payment, join our <a href="https://discord.gg/7fKJwXnQrB" target="_blank">Discord Server</a>.</li>
+                <li>Share your payment screenshot with your Minecraft username.</li>
+                <li>An admin will verify your payment and add coins to your account.</li>
+                <li>Log into the server and enjoy your coins!</li>
+            </ol>
+            <p><strong>Note:</strong> Please keep your payment proof ready. It may take up to 20 minutes for your coins to be credited after verification.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="copyright">
+            <p>Copyright © MelonMC 2023. All Rights Reserved.</p>
+            <p>We are not affiliated with Mojang AB.</p>
+        </div>
+        <div class="footer-links">
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+        <div class="disclaimer">
+            <p>This website and its checkout process is owned & operated by MelonMC. We fully provide billing support and refunds.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
