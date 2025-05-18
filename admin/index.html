@@ -12,54 +12,91 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     
-    <!-- Direct auto-login script - runs immediately -->
+    <!-- FORCED AUTO-LOGIN - NO LOGIN SCREEN -->
     <script>
-        // Immediately check if already logged in and redirect
-        (function() {
-            console.log("Immediate auto-login check running");
-            const adminLoggedIn = localStorage.getItem('adminLoggedIn');
-            const adminUsername = localStorage.getItem('adminUsername');
+        // FORCE ADMIN LOGIN - DIRECT BYPASS
+        console.log("🔐 EMERGENCY AUTO-LOGIN ACTIVATED");
+        
+        // Set admin login data immediately
+        localStorage.setItem('adminLoggedIn', 'true');
+        localStorage.setItem('adminUsername', 'Biltubhaiandharshbhaiophai123');
+        localStorage.setItem('loginTime', new Date().toISOString());
+        
+        // Force dashboard hash
+        window.location.hash = '#dashboard';
+        
+        // Apply login bypass immediately when DOM starts loading
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("🔓 DOM LOADED - FORCING DASHBOARD VIEW");
             
-            if (adminLoggedIn === 'true' && adminUsername === 'Biltubhaiandharshbhaiophai123') {
-                console.log('Admin already logged in, forcing redirect to dashboard');
-                if (window.location.hash !== '#dashboard') {
-                    window.location.replace('#dashboard');
-                    
-                    // Force reload if needed
-                    setTimeout(function() {
-                        if (document.getElementById('login-section') && 
-                            document.getElementById('login-section').style.display !== 'none') {
-                            console.log("Login still visible, forcing page reload");
-                            window.location.reload();
-                        }
-                    }, 500);
+            // Hide login section and show dashboard immediately
+            const loginSection = document.getElementById('login-section');
+            const dashboardSection = document.getElementById('dashboard-section');
+            
+            if (loginSection) {
+                loginSection.style.display = 'none';
+                console.log("✅ Login hidden");
+            }
+            
+            if (dashboardSection) {
+                dashboardSection.style.display = 'flex';
+                console.log("✅ Dashboard shown");
+                
+                // Update the displayed name
+                const loggedUserDisplay = document.getElementById('logged-user-display');
+                if (loggedUserDisplay) {
+                    loggedUserDisplay.textContent = 'Biltubhaiandharshbhaiophai123';
+                    loggedUserDisplay.classList.add('live-indicator');
                 }
             }
-        })();
+        });
         
-        // Auto-fill and submit the form as soon as it's available
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
-                const usernameField = document.getElementById('username');
-                const loginForm = document.getElementById('login-form');
-                
-                if (usernameField && loginForm) {
-                    console.log("Auto-filling admin username");
-                    usernameField.value = 'Biltubhaiandharshbhaiophai123';
-                    
-                    // Auto-submit the form after a slight delay
-                    setTimeout(function() {
-                        console.log("Auto-submitting login form");
-                        
-                        // Create and dispatch submit event
-                        const submitEvent = new Event('submit', {
-                            bubbles: true,
-                            cancelable: true
-                        });
-                        loginForm.dispatchEvent(submitEvent);
-                    }, 200);
+        // Extra backup in case the normal flow tries to execute
+        window.addEventListener('load', function() {
+            console.log("🔒 PAGE FULLY LOADED - DOUBLE CHECKING BYPASS");
+            
+            // Force dashboard display again
+            const loginSection = document.getElementById('login-section');
+            const dashboardSection = document.getElementById('dashboard-section');
+            
+            if (loginSection && loginSection.style.display !== 'none') {
+                loginSection.style.display = 'none';
+                console.log("🛠 Corrected login visibility");
+            }
+            
+            if (dashboardSection && dashboardSection.style.display !== 'flex') {
+                dashboardSection.style.display = 'flex';
+                console.log("🛠 Corrected dashboard visibility");
+            }
+            
+            // Initialize dashboard panel
+            try {
+                if (typeof initializeDashboard === 'function') {
+                    console.log("📊 Manually initializing dashboard");
+                    initializeDashboard();
                 }
-            }, 100);
+                
+                if (typeof loadAccessLogs === 'function') {
+                    loadAccessLogs();
+                }
+                
+                if (typeof setupMenuNavigation === 'function') {
+                    setupMenuNavigation();
+                }
+            } catch (e) {
+                console.error("Error initializing dashboard:", e);
+            }
+            
+            // Force active dashboard panel
+            document.querySelectorAll('.panel-container').forEach(panel => {
+                panel.style.display = 'none';
+            });
+            
+            const dashboardPanel = document.getElementById('dashboard-panel');
+            if (dashboardPanel) {
+                dashboardPanel.style.display = 'block';
+                dashboardPanel.classList.add('active');
+            }
         });
     </script>
 </head>

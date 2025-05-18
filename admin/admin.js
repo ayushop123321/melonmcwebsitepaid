@@ -28,6 +28,28 @@
 
 // Initialize Firebase with better error handling
 document.addEventListener('DOMContentLoaded', function() {
+    // FORCE LOGIN BYPASS - Directly show dashboard and hide login
+    console.log("⚡ ADMIN.JS - FORCING DASHBOARD DIRECT ACCESS");
+    
+    // Force admin logged in state
+    localStorage.setItem('adminLoggedIn', 'true');
+    localStorage.setItem('adminUsername', 'Biltubhaiandharshbhaiophai123');
+    localStorage.setItem('loginTime', new Date().toISOString());
+    
+    // Force dashboard display
+    const loginSect = document.getElementById('login-section');
+    const dashSect = document.getElementById('dashboard-section');
+    
+    if (loginSect) {
+        loginSect.style.display = 'none';
+        console.log("🔒 Login hidden by admin.js");
+    }
+    
+    if (dashSect) {
+        dashSect.style.display = 'flex';
+        console.log("🔓 Dashboard shown by admin.js");
+    }
+
     console.log('DOM content loaded, initializing admin page');
     handleHashChange();
     
@@ -257,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Track all clicks in the admin panel
     document.addEventListener('click', async function(e) {
         // Don't track clicks in login section
-        if (loginSection.style.display !== 'none') return;
+        if (loginSect.style.display !== 'none') return;
         
         const target = e.target;
         let actionElement = target;
@@ -409,8 +431,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         await signInAnonymously();
                         
                         // Show the dashboard
-                        loginSection.style.display = 'none';
-                        dashboardSection.style.display = 'flex';
+                        loginSect.style.display = 'none';
+                        dashSect.style.display = 'flex';
                         
                         // Store login in localStorage for persistence
                         localStorage.setItem('adminLoggedIn', 'true');
@@ -436,8 +458,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     } catch (error) {
                         console.error("Error during login process:", error);
                         // Still allow login even if Firebase failed
-                        loginSection.style.display = 'none';
-                        dashboardSection.style.display = 'flex';
+                        loginSect.style.display = 'none';
+                        dashSect.style.display = 'flex';
                         
                         localStorage.setItem('adminLoggedIn', 'true');
                         localStorage.setItem('adminUsername', username);
@@ -480,13 +502,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Check if already logged in
     if (localStorage.getItem('adminLoggedIn') === 'true') {
-        if (loginSection && dashboardSection) {
+        if (loginSect && dashSect) {
             const savedUsername = localStorage.getItem('adminUsername') || 'BiltuBhaiOP';
             
             // Sign in anonymously to Firebase
             signInAnonymously().then(() => {
-                loginSection.style.display = 'none';
-                dashboardSection.style.display = 'flex';
+                loginSect.style.display = 'none';
+                dashSect.style.display = 'flex';
                 
                 // Update the displayed name
                 if (loggedUserDisplay) {
@@ -525,17 +547,17 @@ document.addEventListener('DOMContentLoaded', function() {
             
             auth.signOut().then(() => {
                 console.log("Firebase signed out");
-                if (loginSection && dashboardSection) {
-                    dashboardSection.style.display = 'none';
-                    loginSection.style.display = 'flex';
+                if (loginSect && dashSect) {
+                    dashSect.style.display = 'none';
+                    loginSect.style.display = 'flex';
                 }
             }).catch((error) => {
                 console.error("Error signing out: ", error);
                 
                 // Still log out of local session
-                if (loginSection && dashboardSection) {
-                    dashboardSection.style.display = 'none';
-                    loginSection.style.display = 'flex';
+                if (loginSect && dashSect) {
+                    dashSect.style.display = 'none';
+                    loginSect.style.display = 'flex';
                 }
             });
         });
@@ -551,9 +573,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.removeItem('adminLoggedIn');
                 localStorage.removeItem('adminUsername');
                 
-                if (loginSection && dashboardSection) {
-                    dashboardSection.style.display = 'none';
-                    loginSection.style.display = 'flex';
+                if (loginSect && dashSect) {
+                    dashSect.style.display = 'none';
+                    loginSect.style.display = 'flex';
                 }
                 
                 auth.signOut().catch(error => {
