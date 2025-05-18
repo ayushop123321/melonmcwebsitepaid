@@ -17,13 +17,24 @@ if %ERRORLEVEL% neq 0 (
 
 echo Setting up Git repository...
 git init
-git checkout -b main
-git add .
+
+echo Configuring Git...
 git config --local user.name "MelonMC Deployment"
 git config --local user.email "deployment@melon-mc.fun"
+
+echo Setting up main branch...
+git branch -m main
+
+echo Adding files to commit...
+git add .
+
+echo Committing changes...
 git commit -m "MelonMC Website Deployment"
 
-echo Pushing to GitHub...
+echo Removing old remote if it exists...
+git remote remove origin 2>nul
+
+echo Adding remote and pushing...
 git remote add origin https://github.com/%GITHUB_USERNAME%/%REPO_NAME%.git
 git push -f origin main
 
