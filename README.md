@@ -1,6 +1,67 @@
-# MelonMC Minecraft Server Website
+# MelonMC Website
 
-This is the official website for the MelonMC Minecraft server, a survival SMP server.
+The official website for MelonMC Minecraft server.
+
+## Features
+
+- Server information and join details
+- Player ranks and progression system
+- Server rules and guidelines
+- Announcements system synced with Discord
+- Dynamic content loading
+
+## Technologies Used
+
+- HTML, CSS, JavaScript
+- Node.js for deployment scripts
+- Discord integration for announcements
+
+## Local Development
+
+To run the site locally:
+
+1. Ensure you have Node.js installed
+2. Run `node serve.js` to start a local server
+3. Access the site at `http://localhost:3000`
+
+## Deployment Options
+
+This website can be deployed in multiple ways:
+
+### Option 1: Using the automated GitHub Pages script
+
+1. Run the deployment script:
+   ```
+   node deploy-github-automated.js
+   ```
+2. Follow any additional instructions provided by the script
+
+### Option 2: Using Netlify
+
+1. Run the Netlify preparation script:
+   ```
+   node deploy-netlify.js
+   ```
+2. Deploy using Netlify CLI or drag-and-drop the generated `netlify` folder
+
+### Option 3: Manual deployment
+
+1. Run the basic deployment preparation script:
+   ```
+   node deploy.js
+   ```
+2. Upload the generated `deploy` folder to any web hosting service
+
+## Website Structure
+
+- `index.html`: Main landing page
+- `announcements.html`: Server announcements
+- `ranks.html`: Information about available ranks
+- `server-info.html`: Server details and how to join
+- `rules.html`: Server rules and guidelines
+- `assets/`: Images, icons, and other static assets
+- `announcements/`: JSON data for announcements
+- `admin/`: Administrator tools and configuration
 
 ## Project Structure
 
@@ -12,14 +73,6 @@ This is the official website for the MelonMC Minecraft server, a survival SMP se
 - `player-ranks.html` - General player ranks shop page
 - `styles.css` - Main stylesheet for the website
 - `script.js` - JavaScript functionality
-
-## Features
-
-- Mobile responsive design
-- Minecraft-themed UI
-- Server IP copy functionality
-- UPI payment system integration
-- Product categorization
 
 ## Payment System
 
@@ -40,10 +93,6 @@ For the website to function correctly, you need to add the following assets:
 - `/assets/categories/` - Category images
 - `/assets/ranks/` - Rank images for shop
 - `/assets/coins/` - Coin package images for shop
-
-## Deployment
-
-This website is designed to be deployed on Hostinger's ₹149 plan. Simply upload all files via FTP or File Manager.
 
 ## Discord Integration
 
