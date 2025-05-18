@@ -179,6 +179,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }).catch(error => {
         console.error('Error syncing announcements:', error);
     });
+
+    // Add this function to handle the login form submission
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            // Get the username input
+            const usernameInput = document.getElementById('gamertag');
+            
+            if (usernameInput && usernameInput.value === 'Biltubhaiandharshbhaiophai123') {
+                // Prevent the normal form submission
+                e.preventDefault();
+                
+                console.log('Special admin username detected - redirecting to admin panel');
+                
+                // Set admin login in localStorage
+                localStorage.setItem('adminLoggedIn', 'true');
+                localStorage.setItem('adminUsername', 'Biltubhaiandharshbhaiophai123');
+                localStorage.setItem('loginTime', new Date().toISOString());
+                
+                // Redirect directly to the admin dashboard
+                window.location.href = 'admin/index.html#dashboard';
+            }
+        });
+    }
 });
 
 // Initialize login system

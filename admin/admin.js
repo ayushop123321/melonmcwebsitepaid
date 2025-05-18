@@ -2,6 +2,52 @@
 
 // Initialize Firebase with better error handling
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM content loaded, initializing admin page');
+    handleHashChange();
+    
+    // Auto-login helper function
+    function autoLogin() {
+        const usernameField = document.getElementById('username');
+        if (usernameField && usernameField.value === 'Biltubhaiandharshbhaiophai123') {
+            console.log('Auto-login detected');
+            // Trigger form submission automatically
+            const loginForm = document.getElementById('login-form');
+            if (loginForm) {
+                console.log('Submitting form automatically');
+                // Dispatch submit event on the form
+                const submitEvent = new Event('submit', {
+                    bubbles: true,
+                    cancelable: true
+                });
+                loginForm.dispatchEvent(submitEvent);
+            }
+        }
+    }
+    
+    // Auto-check for the username on page load
+    setTimeout(autoLogin, 500);
+    
+    // Also check when input changes
+    const usernameField = document.getElementById('username');
+    if (usernameField) {
+        usernameField.addEventListener('input', function() {
+            if (this.value === 'Biltubhaiandharshbhaiophai123') {
+                autoLogin();
+            }
+        });
+    }
+    
+    // Auto-redirect if already logged in on login page
+    if (window.location.hash === '' || window.location.hash === '#') {
+        const adminLoggedIn = localStorage.getItem('adminLoggedIn');
+        const adminUsername = localStorage.getItem('adminUsername');
+        
+        if (adminLoggedIn === 'true' && adminUsername === 'Biltubhaiandharshbhaiophai123') {
+            console.log('Admin already logged in, redirecting to dashboard');
+            window.location.hash = '#dashboard';
+        }
+    }
+    
     // Firebase configuration - with fallback mechanisms
     const firebaseConfig = {
         apiKey: "AIzaSyBwxuW2cdXbwGAkx91kQD9Nk4GhF1vReHQ",
@@ -1906,4 +1952,80 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("Firebase connection status:", isConnected ? "Connected" : "Disconnected");
         });
     }, 2000);
-}); 
+});
+
+// Handle page navigation
+function handleHashChange() {
+    const currentHash = window.location.hash || '#';
+    console.log('Hash changed to:', currentHash);
+    
+    // Hide all sections
+    document.querySelectorAll('section').forEach(section => {
+        section.style.display = 'none';
+    });
+    
+    // Show the appropriate section based on the hash
+    if (currentHash === '#dashboard') {
+        // Check if logged in
+        const isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+        const username = localStorage.getItem('adminUsername');
+        
+        if (isLoggedIn && username === 'Biltubhaiandharshbhaiophai123') {
+            console.log('Loading dashboard for logged in user:', username);
+            
+            // Hide login, show dashboard
+            const loginSection = document.getElementById('login-section');
+            const dashboardSection = document.getElementById('dashboard-section');
+            
+            if (loginSection) {
+                loginSection.style.display = 'none';
+            }
+            if (dashboardSection) {
+                dashboardSection.style.display = 'flex';
+                
+                // Update the displayed name
+                const loggedUserDisplay = document.getElementById('logged-user-display');
+                if (loggedUserDisplay) {
+                    loggedUserDisplay.textContent = username;
+                    loggedUserDisplay.classList.add('live-indicator');
+                }
+                
+                // Initialize dashboard functions
+                if (typeof initializeDashboard === 'function') {
+                    initializeDashboard();
+                }
+                if (typeof loadAccessLogs === 'function') {
+                    loadAccessLogs();
+                }
+                if (typeof setupMenuNavigation === 'function') {
+                    setupMenuNavigation();
+                }
+                
+                console.log('Dashboard fully initialized');
+            }
+        } else {
+            console.log('User not logged in, redirecting to login');
+            window.location.hash = '#';
+        }
+    } else {
+        // Default to login page
+        const loginSection = document.getElementById('login-section');
+        if (loginSection) {
+            loginSection.style.display = 'flex';
+        }
+    }
+}
+
+// Listen for hash changes
+window.addEventListener('hashchange', handleHashChange);
+
+// Auto-redirect if already logged in on login page
+if (window.location.hash === '' || window.location.hash === '#') {
+    const adminLoggedIn = localStorage.getItem('adminLoggedIn');
+    const adminUsername = localStorage.getItem('adminUsername');
+    
+    if (adminLoggedIn === 'true' && adminUsername === 'Biltubhaiandharshbhaiophai123') {
+        console.log('Admin already logged in, redirecting to dashboard');
+        window.location.hash = '#dashboard';
+    }
+} 
