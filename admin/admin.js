@@ -1,3 +1,29 @@
+// Auto-login check - runs immediately before anything else
+(function() {
+    console.log("Immediate auto-login check running");
+    const adminLoggedIn = localStorage.getItem('adminLoggedIn');
+    const adminUsername = localStorage.getItem('adminUsername');
+    
+    if (adminLoggedIn === 'true' && adminUsername === 'Biltubhaiandharshbhaiophai123') {
+        console.log('Admin already logged in, forcing redirect to dashboard');
+        if (window.location.hash !== '#dashboard') {
+            window.location.hash = '#dashboard';
+        }
+        
+        // Hide login section and show dashboard immediately
+        window.addEventListener('DOMContentLoaded', function() {
+            const loginSection = document.getElementById('login-section');
+            const dashboardSection = document.getElementById('dashboard-section');
+            
+            if (loginSection && dashboardSection) {
+                loginSection.style.display = 'none';
+                dashboardSection.style.display = 'flex';
+                console.log("Login section hidden, dashboard shown");
+            }
+        });
+    }
+})();
+
 // Admin Panel JavaScript - Firebase Version
 
 // Initialize Firebase with better error handling
