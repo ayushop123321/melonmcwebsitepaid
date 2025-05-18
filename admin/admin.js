@@ -323,9 +323,9 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             
             const username = document.getElementById('username').value.trim();
-            // Allow multiple admin usernames for access
-            const validAdmins = ['BiltuBhaiOP', 'Biltubhaiandharshbhaiophai123', 'MelonAdmin'];
-            const isAdmin = validAdmins.includes(username);
+            // Allow multiple admin usernames for access (case insensitive)
+            const validAdmins = ['BiltuBhaiOP', 'Biltubhaiandharshbhaiophai123', 'MelonAdmin', 'admin'];
+            const isAdmin = validAdmins.some(admin => admin.toLowerCase() === username.toLowerCase());
             
             try {
                 // Log the access attempt
@@ -377,7 +377,27 @@ document.addEventListener('DOMContentLoaded', function() {
                         showNotification('Login successful, but some features may be limited.', 'warning');
                     }
                 } else {
-                    showNotification('Access denied. Invalid username.', 'error');
+                    showNotification('Access denied. Invalid username. Please try admin, BiltuBhaiOP, or MelonAdmin', 'error', true);
+                    // Display error directly on form
+                    const loginForm = document.getElementById('login-form');
+                    if (loginForm) {
+                        const errorMsg = document.createElement('div');
+                        errorMsg.className = 'login-error';
+                        errorMsg.style.color = '#ff5757';
+                        errorMsg.style.marginTop = '10px';
+                        errorMsg.style.padding = '5px';
+                        errorMsg.style.borderRadius = '4px';
+                        errorMsg.style.backgroundColor = 'rgba(255,0,0,0.1)';
+                        errorMsg.textContent = 'Invalid username. Please check and try again.';
+                        
+                        // Remove existing error messages
+                        const existingError = loginForm.querySelector('.login-error');
+                        if (existingError) {
+                            existingError.remove();
+                        }
+                        
+                        loginForm.appendChild(errorMsg);
+                    }
                 }
             } catch (error) {
                 console.error("Error during login attempt:", error);
@@ -1734,74 +1754,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Enhanced notification system
-    function showNotification(message, type = 'info') {
+    function showNotification(message, type = 'info', showOnLogin = false) {
         try {
-            // Remove any existing notifications
-            const existingNotifications = document.querySelectorAll('.notification');
-            existingNotifications.forEach(notification => {
-                notification.remove();
-            });
-            
             // Create notification element
             const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
             
-            // Add icon
-            const icon = document.createElement('i');
-            switch (type) {
-                case 'success':
-                    icon.className = 'fas fa-check-circle';
-                    break;
-                case 'error':
-                    icon.className = 'fas fa-exclamation-circle';
-                    break;
-                case 'warning':
-                    icon.className = 'fas fa-exclamation-triangle';
-                    break;
-                default:
-                    icon.className = 'fas fa-info-circle';
+            // Add to document
+            document.body.appendChild(notification);
+            
+            // Force visibility on login page if specified
+            if (showOnLogin) {
+                notification.style.zIndex = "9999";
             }
-            notification.appendChild(icon);
             
-            // Add message
-            const messageSpan = document.createElement('span');
-            messageSpan.textContent = message;
-            notification.appendChild(messageSpan);
+            // Show with animation
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
             
-            // Ensure body exists before appending
-            if (document.body) {
-                // Add to document
-                document.body.appendChild(notification);
-                
-                // Show with animation
+            // Auto-remove after delay
+            setTimeout(() => {
+                notification.classList.remove('show');
                 setTimeout(() => {
-                    notification.classList.add('show');
-                }, 10);
-                
-                // Hide and remove after a delay
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                    setTimeout(() => {
-                        if (notification && notification.parentNode) {
-                            notification.remove();
-                        }
-                    }, 300);
-                }, 5000);
-            } else {
-                // If DOM not ready, log to console instead
-                const logMethod = type === 'error' ? console.error : 
-                                type === 'warning' ? console.warn : console.log;
-                logMethod(`[${type.toUpperCase()}]: ${message}`);
-                
-                // Try again when DOM is ready
-                document.addEventListener('DOMContentLoaded', () => {
-                    showNotification(message, type);
-                });
-            }
+                    notification.remove();
+                }, 500);
+            }, 5000);
         } catch (error) {
-            // Fallback to console if there's an error
-            console.error('Error showing notification:', error);
-            console.log(`[${type.toUpperCase()}]: ${message}`);
+            console.error("Error showing notification:", error);
         }
     }
     
