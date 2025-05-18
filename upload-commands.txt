@@ -1,0 +1,9 @@
+git init
+git branch -m main
+git add .
+git config --local user.name "MelonMC"
+git config --local user.email "deployment@melonmc.com"
+git commit -m "MelonMC Website Upload"
+git remote remove origin
+git remote add origin https://github.com/ayushop123321/ayushop123321.github.io.git
+git push -f origin main 

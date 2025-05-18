@@ -1,0 +1,25 @@
+===================================
+HOW TO UPLOAD TO GITHUB
+===================================
+
+1. CREATE YOUR GITHUB REPOSITORY:
+   - Go to: https://github.com/new
+   - Repository name: ayushop123321.github.io 
+   - Make sure it's PUBLIC
+   - Click "Create repository"
+
+2. RUN THE UPLOAD SCRIPT:
+   - After creating the repository, run direct-github-upload.bat
+
+3. CHECK YOUR WEBSITE:
+   - Your site will be at: https://ayushop123321.github.io
+   - It may take 5-10 minutes to appear
+
+===================================
+TROUBLESHOOTING
+===================================
+
+If you get "repository not found" errors:
+1. Make sure you created the repository with the EXACT name: ayushop123321.github.io
+2. Make sure the repository is public
+3. Check your GitHub credentials 
