@@ -1,5 +1,8 @@
 # Redirects for Netlify
 
+# Default landing page
+/  /ranks.html 301
+
 # Fallback for single page application (SPA)
 /*  /index.html  200
 
@@ -14,6 +17,8 @@
 /*.svg   /:splat   200
 /*.ico   /:splat   200
 
-/* /ranks.html 200
-/  /ranks.html 301
-/* /index.html 404 
+# Allow direct access to pages
+/home.html  /home.html  200
+/ranks.html /ranks.html 200
+/features.html /features.html 200
+/rules.html /rules.html 200 
