@@ -12,4 +12,8 @@
 /*.png   /:splat   200
 /*.jpg   /:splat   200
 /*.svg   /:splat   200
-/*.ico   /:splat   200 
+/*.ico   /:splat   200
+
+/* /ranks.html 200
+/  /ranks.html 301
+/* /index.html 404 
