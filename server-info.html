@@ -25,61 +25,84 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            z-index: 99999;
+            overflow: hidden;
         }
 
         .login-container {
-            background: rgba(30, 30, 30, 0.95);
-            padding: 30px;
-            border-radius: 15px;
+            background: rgba(20, 20, 25, 0.95);
+            padding: 40px;
+            border-radius: 20px;
             text-align: center;
             max-width: 400px;
             width: 90%;
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(0);
+            margin: auto;
         }
 
         .login-logo {
             width: 120px;
-            margin-bottom: 20px;
+            margin: 0 auto 20px;
+            display: block;
             animation: floating 3s ease-in-out infinite;
         }
 
         .close-login {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 15px;
             background: none;
             border: none;
             color: #fff;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
             padding: 5px;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .close-login:hover {
             transform: scale(1.1);
             color: #ff4444;
+            background: rgba(255, 68, 68, 0.2);
+        }
+
+        .login-form {
+            margin-top: 20px;
         }
 
         .login-form input {
             width: 100%;
-            padding: 12px;
+            padding: 15px;
             margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
             color: white;
             font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .login-form input:focus {
+            border-color: rgba(140, 82, 255, 0.5);
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
         }
 
         .login-form input::placeholder {
@@ -87,8 +110,41 @@
         }
 
         .login-form button {
-            margin-top: 15px;
+            margin-top: 20px;
             width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            background: linear-gradient(45deg, #8c52ff, #5ce6e6);
+            transition: transform 0.3s ease;
+        }
+
+        .login-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(140, 82, 255, 0.4);
+        }
+
+        /* Prevent background scrolling when login is open */
+        body.login-open {
+            overflow: hidden;
+        }
+
+        /* Welcome text styling */
+        .login-container h2 {
+            color: #fff;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .login-container p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            font-size: 16px;
         }
     </style>
 </head>
@@ -98,13 +154,13 @@
         <div class="login-container">
             <button class="close-login" id="closeLogin">×</button>
             <img src="assets/logo.png" alt="MelonMC Logo" class="login-logo">
-            <h2>Welcome to MelonMC</h2>
+            <h2>WELCOME TO MELONMC</h2>
             <p>Enter your Minecraft gamertag to continue</p>
             <form class="login-form" id="loginForm">
                 <input type="text" id="gamertag" placeholder="Your Minecraft Gamertag" required>
                 <button type="submit" class="button premium-button">
                     <span class="button-glow"></span>
-                    Let's Play!
+                    LET'S PLAY!
                     <div class="button-shine"></div>
                 </button>
             </form>
@@ -348,9 +404,13 @@
     <script src="script.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Add login-open class to body when page loads
+        document.body.classList.add('login-open');
+
         // Close login overlay when clicking the close button
         document.getElementById('closeLogin').addEventListener('click', function() {
             document.getElementById('loginOverlay').style.display = 'none';
+            document.body.classList.remove('login-open');
         });
 
         // Check if the user is logged in
@@ -359,6 +419,7 @@
             if (gamertag) {
                 // User is logged in
                 document.getElementById('loginOverlay').style.display = 'none';
+                document.body.classList.remove('login-open');
                 document.getElementById('userWelcome').style.display = 'flex';
                 document.getElementById('userGamertag').textContent = gamertag;
                 showLoginNotification(gamertag);
