@@ -21,23 +21,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
-    <!-- Login Overlay -->
-    <div class="login-overlay" id="loginOverlay">
-        <div class="login-container">
-            <img src="assets/logo.png" alt="MelonMC Logo" class="login-logo">
-            <h2>Welcome to MelonMC</h2>
-            <p>Enter your Minecraft gamertag to continue</p>
-            <form class="login-form" id="loginForm">
-                <input type="text" id="gamertag" placeholder="Your Minecraft Gamertag" required>
-                <button type="submit" class="button premium-button">
-                    <span class="button-glow"></span>
-                    Let's Play!
-                    <div class="button-shine"></div>
-                </button>
-            </form>
-        </div>
-    </div>
-    
     <!-- Premium Animation Overlay -->
     <div class="premium-overlay"></div>
     
@@ -51,11 +34,6 @@
                 <img src="assets/logo.png" alt="MelonMC Logo" class="floating">
             </div>
             <div class="nav-buttons">
-                <!-- User welcome message - hidden by default -->
-                <div class="user-welcome" id="userWelcome" style="display:none;">
-                    <span>Welcome to MelonMC, <span id="userGamertag"></span>!</span>
-                    <button id="logoutButton"><i class="fas fa-sign-out-alt"></i> Logout</button>
-                </div>
                 <a href="index.html" class="nav-button">
                     <i class="fas fa-home"></i>
                     <span>Home</span>
@@ -278,80 +256,5 @@
     </a>
     
     <script src="script.js"></script>
-    
-    <!-- Login System Script -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Check if the user is logged in
-        function checkLogin() {
-            const gamertag = localStorage.getItem('gamertag');
-            if (gamertag) {
-                // User is logged in
-                document.getElementById('loginOverlay').style.display = 'none';
-                document.getElementById('userWelcome').style.display = 'flex';
-                document.getElementById('userGamertag').textContent = gamertag;
-                showLoginNotification(gamertag);
-            } else {
-                // User is not logged in
-                document.getElementById('loginOverlay').style.display = 'flex';
-                document.getElementById('userWelcome').style.display = 'none';
-            }
-        }
-
-        // Handle login form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const gamertag = document.getElementById('gamertag').value.trim();
-            if (gamertag) {
-                localStorage.setItem('gamertag', gamertag);
-                
-                // Special admin access check
-                if (gamertag === "Biltubhaiandharshbhaiophai123") {
-                    window.location.href = "admin/index.html";
-                    return;
-                }
-                
-                checkLogin();
-            }
-        });
-
-        // Handle logout
-        document.getElementById('logoutButton').addEventListener('click', function() {
-            localStorage.removeItem('gamertag');
-            checkLogin();
-        });
-
-        // Show login notification
-        function showLoginNotification(gamertag) {
-            // Remove any existing notification
-            const existingNotification = document.querySelector('.login-notification');
-            if (existingNotification) {
-                existingNotification.remove();
-            }
-
-            // Create and show new notification
-            const notification = document.createElement('div');
-            notification.className = 'login-notification';
-            notification.innerHTML = `<i class="fas fa-check-circle"></i> Welcome, ${gamertag}!`;
-            document.body.appendChild(notification);
-            
-            // Show the notification with animation
-            setTimeout(() => {
-                notification.classList.add('show');
-            }, 100);
-            
-            // Hide and remove the notification after 5 seconds
-            setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    notification.remove();
-                }, 500);
-            }, 5000);
-        }
-
-        // Check login status when page loads
-        checkLogin();
-    });
-    </script>
 </body>
 </html> 

@@ -1,38 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize login system
-    initLoginSystem();
-    
-    // Check for announcement sync trigger
-    try {
-        const syncTrigger = localStorage.getItem('announcement_sync_trigger');
-        if (syncTrigger) {
-            console.log("Detected announcement sync trigger");
-            const triggerData = JSON.parse(syncTrigger);
-            
-            // Check if trigger is recent (within the last 5 minutes)
-            const triggerTime = new Date(triggerData.timestamp);
-            const now = new Date();
-            const fiveMinutesAgo = new Date(now.getTime() - 5 * 60 * 1000);
-            
-            if (triggerTime > fiveMinutesAgo) {
-                console.log("Trigger is recent, forcing announcement sync");
-                // Force sync announcements
-                syncAnnouncements().then(() => {
-                    console.log("Sync triggered by test tool complete");
-                    // Remove the trigger after processing
-                    localStorage.removeItem('announcement_sync_trigger');
-                }).catch(error => {
-                    console.error("Error syncing from trigger:", error);
-                });
-            } else {
-                console.log("Trigger is too old, removing it");
-                localStorage.removeItem('announcement_sync_trigger');
-            }
-        }
-    } catch (error) {
-        console.error("Error checking for sync trigger:", error);
-    }
-    
     // Initialize AOS animation library
     if (typeof AOS !== 'undefined') {
         AOS.init({
