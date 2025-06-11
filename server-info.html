@@ -19,8 +19,98 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!-- Three.js for 3D elements -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        /* Login Overlay Styles */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .login-container {
+            background: rgba(30, 30, 30, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-logo {
+            width: 120px;
+            margin-bottom: 20px;
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        .close-login {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .close-login:hover {
+            transform: scale(1.1);
+            color: #ff4444;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+        }
+
+        .login-form input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .login-form button {
+            margin-top: 15px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
+    <!-- Login Overlay -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-container">
+            <button class="close-login" id="closeLogin">×</button>
+            <img src="assets/logo.png" alt="MelonMC Logo" class="login-logo">
+            <h2>Welcome to MelonMC</h2>
+            <p>Enter your Minecraft gamertag to continue</p>
+            <form class="login-form" id="loginForm">
+                <input type="text" id="gamertag" placeholder="Your Minecraft Gamertag" required>
+                <button type="submit" class="button premium-button">
+                    <span class="button-glow"></span>
+                    Let's Play!
+                    <div class="button-shine"></div>
+                </button>
+            </form>
+        </div>
+    </div>
+    
     <!-- Premium Animation Overlay -->
     <div class="premium-overlay"></div>
     
@@ -256,5 +346,64 @@
     </a>
     
     <script src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Close login overlay when clicking the close button
+        document.getElementById('closeLogin').addEventListener('click', function() {
+            document.getElementById('loginOverlay').style.display = 'none';
+        });
+
+        // Check if the user is logged in
+        function checkLogin() {
+            const gamertag = localStorage.getItem('gamertag');
+            if (gamertag) {
+                // User is logged in
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('userWelcome').style.display = 'flex';
+                document.getElementById('userGamertag').textContent = gamertag;
+                showLoginNotification(gamertag);
+            }
+        }
+
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const gamertag = document.getElementById('gamertag').value.trim();
+            if (gamertag) {
+                localStorage.setItem('gamertag', gamertag);
+                
+                // Special admin access check
+                if (gamertag === "Biltubhaiandharshbhaiophai123") {
+                    window.location.href = "admin/index.html";
+                    return;
+                }
+                
+                checkLogin();
+            }
+        });
+
+        // Show login notification
+        function showLoginNotification(gamertag) {
+            const notification = document.createElement('div');
+            notification.className = 'login-notification';
+            notification.innerHTML = `<i class="fas fa-check-circle"></i> Welcome, ${gamertag}!`;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 500);
+            }, 5000);
+        }
+
+        // Check login status when page loads
+        checkLogin();
+    });
+    </script>
 </body>
 </html> 
