@@ -1,7 +1,7 @@
 # Redirects for Netlify
 
 # Default landing page
-/  /home.html 200
+/  /index.html 200
 
 # Fallback for single page application (SPA)
 /*  /index.html  200

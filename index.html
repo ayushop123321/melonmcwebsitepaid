@@ -244,7 +244,7 @@
 
             // Close login overlay when clicking the close button
             document.getElementById('closeLogin').addEventListener('click', function() {
-                window.location.href = 'ranks.html';
+                window.location.href = 'home.html';
             });
 
         // Handle login form submission
@@ -260,14 +260,14 @@
                     return;
                 }
                 
-                    window.location.href = 'ranks.html';
+                    window.location.href = 'home.html';
                 }
             });
 
             // Check if user is already logged in
             const gamertag = localStorage.getItem('gamertag');
             if (gamertag) {
-                window.location.href = 'ranks.html';
+                window.location.href = 'home.html';
             }
         });
     </script>
