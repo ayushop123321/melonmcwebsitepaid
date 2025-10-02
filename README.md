@@ -5,7 +5,7 @@ The official website for MelonMC Minecraft server.
 ## Features
 
 - Server information and join details
-- Player ranks and progression system
+- Server hosting plans and packages
 - Server rules and guidelines
 - Announcements system synced with Discord
 - Dynamic content loading
@@ -56,7 +56,7 @@ This website can be deployed in multiple ways:
 
 - `index.html`: Main landing page
 - `announcements.html`: Server announcements
-- `ranks.html`: Information about available ranks
+- `ranks.html`: Information about hosting plans and packages
 - `server-info.html`: Server details and how to join
 - `rules.html`: Server rules and guidelines
 - `assets/`: Images, icons, and other static assets
@@ -67,10 +67,10 @@ This website can be deployed in multiple ways:
 
 - `index.html` - Homepage with server information and category selection
 - `coins-lifesteal.html` - LifeSteal Coins shop page
-- `ranks-lifesteal.html` - LifeSteal Ranks shop page
-- `coins-classic.html` - Classic Coins shop page
-- `ranks-classic.html` - Classic Ranks shop page
-- `player-ranks.html` - General player ranks shop page
+- `ranks-lifesteal.html` - LifeSteal hosting packages page
+- `coins-classic.html` - Classic service add-ons page
+- `ranks-classic.html` - Classic hosting packages page
+- `player-ranks.html` - General hosting plans page
 - `styles.css` - Main stylesheet for the website
 - `script.js` - JavaScript functionality
 
@@ -91,7 +91,7 @@ For the website to function correctly, you need to add the following assets:
 - `/assets/bg-texture.png` - Background texture for the website
 - `/assets/qr-code.png` - The UPI QR code for payments
 - `/assets/categories/` - Category images
-- `/assets/ranks/` - Rank images for shop
+- `/assets/ranks/` - Hosting plan images for website
 - `/assets/coins/` - Coin package images for shop
 
 ## Discord Integration
