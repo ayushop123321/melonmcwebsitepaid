@@ -3600,6 +3600,79 @@ header {
     justify-items: center;
 }
 
+/* Features Section Styles */
+.features-section {
+    margin-top: 60px;
+    padding: 40px;
+    background: var(--glass-bg);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.features-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #ffd700, #ff6b6b, #4ecdc4, #45b7d1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 30px;
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.feature-item i {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.ticket-info {
+    margin-top: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(140, 82, 255, 0.1), rgba(92, 225, 230, 0.1));
+    border-radius: 15px;
+    border: 1px solid rgba(140, 82, 255, 0.3);
+}
+
+.ticket-info p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+    color: var(--text-light);
+}
+
+.ticket-info strong {
+    color: var(--primary-bright);
+    text-shadow: 0 0 10px rgba(255, 157, 0, 0.5);
+}
+
 @media (max-width: 768px) {
     .packages-grid {
         grid-template-columns: 1fr;
@@ -3611,6 +3684,20 @@ header {
     
     .premium-card:hover {
         transform: translateY(-10px);
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .features-title {
+        font-size: 2rem;
+    }
+    
+    .features-section {
+        padding: 20px;
+        margin-top: 40px;
     }
 }
   

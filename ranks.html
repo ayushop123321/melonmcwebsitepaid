@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="forced-update" content="true">
-    <title>Ranks - MelonMC</title>
-    <meta name="description" content="Upgrade your gameplay experience with premium ranks on MelonMC Minecraft server.">
+    <title>Hosting Plans - MelonNodes</title>
+    <meta name="description" content="Premium Minecraft server hosting with 99.9% uptime guarantee and DDoS protection.">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
@@ -20,7 +20,7 @@
     <div class="login-overlay" id="loginOverlay">
         <div class="login-container">
             <img src="assets/logo.png" alt="MelonMC Logo" class="login-logo">
-            <h2>Welcome to MelonMC</h2>
+            <h2>Welcome to MelonNodes</h2>
             <p>Enter your Minecraft gamertag to continue</p>
             <form class="login-form" id="loginForm">
                 <input type="text" id="gamertag" placeholder="Your Minecraft Gamertag" required>
@@ -61,8 +61,8 @@
                     Features
                 </a>
                 <a href="ranks.html" class="nav-button home-btn">
-                    <i class="fas fa-crown"></i>
-                    Ranks
+                    <i class="fas fa-server"></i>
+                    Hosting
                 </a>
                 <a href="rules.html" class="nav-button">
                     <i class="fas fa-gavel"></i>
@@ -91,8 +91,8 @@
     <!-- Page Title -->
     <section class="page-title">
         <div class="container">
-            <h1 class="section-title glow-on-hover" data-text="Ranks">Ranks</h1>
-            <p class="subtitle">Upgrade your experience with our premium ranks</p>
+            <h1 class="section-title glow-on-hover" data-text="Hosting Plans">Hosting Plans</h1>
+            <p class="subtitle">Premium Minecraft server hosting with 99.9% uptime guarantee</p>
         </div>
     </section>
     
@@ -100,133 +100,189 @@
     <section class="bg-gradient" id="ranks">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title glow-on-hover mega-title" data-text="Premium Ranks">Premium Ranks</h2>
+                <h2 class="section-title glow-on-hover mega-title" data-text="Hosting Plans">MelonNodes Hosting</h2>
                 <div class="section-divider rainbow-divider"></div>
-                <p class="section-description">Elevate your gameplay with exclusive perks and features</p>
+                <p class="section-description">99.9% Uptime • DDoS Protection • Premium Panel • 3.7 GHz CPU</p>
             </div>
             
             <div class="packages-grid">
+                <!-- PROXY PLAN -->
                 <div class="package-card glass-effect" data-aos="fade-up" data-aos-delay="100">
                     <div class="package-header vip-gradient">
-                        <div class="rank-icon"><i class="fas fa-star"></i></div>
-                        <h3>VIP</h3>
-                        <div class="package-price">49<span class="currency">rs</span></div>
+                        <div class="rank-icon">💫</div>
+                        <h3>PROXY PLAN</h3>
+                        <div class="package-price">60<span class="currency">rs/month</span></div>
                     </div>
                     <div class="package-info">
                         <div class="perks-list">
-                            <div class="perk-item"><i class="fas fa-check"></i> Basic Perks</div>
-                            <div class="perk-item"><i class="fas fa-check"></i> VIP Tag</div>
+                            <div class="perk-item"><i class="fas fa-memory"></i> 2GB RAM</div>
+                            <div class="perk-item"><i class="fas fa-microchip"></i> 100% CPU</div>
+                            <div class="perk-item"><i class="fas fa-hdd"></i> 10GB DISK</div>
+                            <div class="perk-item"><i class="fas fa-shield-alt"></i> DDoS Protection</div>
                         </div>
-                        <a href="https://discord.com/channels/1148113389252522074/1365721945131192391" target="_blank" class="purchase-btn glow-effect">Purchase Now</a>
+                        <button class="purchase-btn glow-effect" onclick="createTicket('PROXY PLAN', '60rs/month')">Create Ticket</button>
                     </div>
                 </div>
 
+                <!-- DIRT PLAN -->
                 <div class="package-card glass-effect" data-aos="fade-up" data-aos-delay="150">
                     <div class="package-header hero-gradient">
-                        <div class="rank-icon"><i class="fas fa-shield-alt"></i></div>
-                        <h3>HERO</h3>
-                        <div class="package-price">99<span class="currency">rs</span></div>
+                        <div class="rank-icon">📢</div>
+                        <h3>DIRT PLAN</h3>
+                        <div class="package-price">100<span class="currency">rs/month</span></div>
                     </div>
                     <div class="package-info">
                         <div class="perks-list">
-                            <div class="perk-item"><i class="fas fa-check"></i> VIP Features</div>
-                            <div class="perk-item"><i class="fas fa-check"></i> Hero Commands</div>
+                            <div class="perk-item"><i class="fas fa-memory"></i> 4GB RAM</div>
+                            <div class="perk-item"><i class="fas fa-microchip"></i> 100% CPU</div>
+                            <div class="perk-item"><i class="fas fa-hdd"></i> 20GB DISK</div>
+                            <div class="perk-item"><i class="fas fa-shield-alt"></i> DDoS Protection</div>
                         </div>
-                        <a href="https://discord.com/channels/1148113389252522074/1365721945131192391" target="_blank" class="purchase-btn glow-effect">Purchase Now</a>
+                        <button class="purchase-btn glow-effect" onclick="createTicket('DIRT PLAN', '100rs/month')">Create Ticket</button>
                     </div>
                 </div>
                 
+                <!-- STONE PLAN -->
                 <div class="package-card glass-effect" data-aos="fade-up" data-aos-delay="200">
                     <div class="package-header legend-gradient">
-                        <div class="rank-icon"><i class="fas fa-trophy"></i></div>
-                        <h3>LEGEND</h3>
-                        <div class="package-price">149<span class="currency">rs</span></div>
+                        <div class="rank-icon">💬</div>
+                        <h3>STONE PLAN</h3>
+                        <div class="package-price">200<span class="currency">rs/month</span></div>
                     </div>
                     <div class="package-info">
                         <div class="perks-list">
-                            <div class="perk-item"><i class="fas fa-check"></i> Hero Features</div>
-                            <div class="perk-item"><i class="fas fa-check"></i> Legend Perks</div>
+                            <div class="perk-item"><i class="fas fa-memory"></i> 6GB RAM</div>
+                            <div class="perk-item"><i class="fas fa-microchip"></i> 200% CPU</div>
+                            <div class="perk-item"><i class="fas fa-hdd"></i> 30GB DISK</div>
+                            <div class="perk-item"><i class="fas fa-shield-alt"></i> DDoS Protection</div>
                         </div>
-                        <a href="https://discord.com/channels/1148113389252522074/1365721945131192391" target="_blank" class="purchase-btn glow-effect">Purchase Now</a>
+                        <button class="purchase-btn glow-effect" onclick="createTicket('STONE PLAN', '200rs/month')">Create Ticket</button>
                     </div>
                 </div>
 
+                <!-- GOLD PLAN -->
                 <div class="package-card glass-effect" data-aos="fade-up" data-aos-delay="250">
                     <div class="package-header titan-gradient">
-                        <div class="rank-icon"><i class="fas fa-fist-raised"></i></div>
-                        <h3>TITAN</h3>
-                        <div class="package-price">199<span class="currency">rs</span></div>
+                        <div class="rank-icon">🚀</div>
+                        <h3>GOLD PLAN</h3>
+                        <div class="package-price">300<span class="currency">rs/month</span></div>
                     </div>
                     <div class="package-info">
                         <div class="perks-list">
-                            <div class="perk-item"><i class="fas fa-check"></i> Legend Features</div>
-                            <div class="perk-item"><i class="fas fa-check"></i> Titan Powers</div>
+                            <div class="perk-item"><i class="fas fa-memory"></i> 8GB RAM</div>
+                            <div class="perk-item"><i class="fas fa-microchip"></i> 300% CPU</div>
+                            <div class="perk-item"><i class="fas fa-hdd"></i> 40GB DISK</div>
+                            <div class="perk-item"><i class="fas fa-shield-alt"></i> DDoS Protection</div>
                         </div>
-                        <a href="https://discord.com/channels/1148113389252522074/1365721945131192391" target="_blank" class="purchase-btn glow-effect">Purchase Now</a>
+                        <button class="purchase-btn glow-effect" onclick="createTicket('GOLD PLAN', '300rs/month')">Create Ticket</button>
                     </div>
                 </div>
                 
+                <!-- DIAMOND PLAN -->
                 <div class="package-card glass-effect" data-aos="fade-up" data-aos-delay="300">
                     <div class="package-header lord-gradient">
-                        <div class="rank-icon"><i class="fas fa-crown"></i></div>
-                        <h3>LORD</h3>
-                        <div class="package-price">299<span class="currency">rs</span></div>
+                        <div class="rank-icon">💎</div>
+                        <h3>DIAMOND PLAN</h3>
+                        <div class="package-price">450<span class="currency">rs/month</span></div>
                     </div>
                     <div class="package-info">
                         <div class="perks-list">
-                            <div class="perk-item"><i class="fas fa-check"></i> Titan Features</div>
-                            <div class="perk-item"><i class="fas fa-check"></i> Lord Authority</div>
+                            <div class="perk-item"><i class="fas fa-memory"></i> 12GB RAM</div>
+                            <div class="perk-item"><i class="fas fa-microchip"></i> 400% CPU</div>
+                            <div class="perk-item"><i class="fas fa-hdd"></i> 40GB DISK</div>
+                            <div class="perk-item"><i class="fas fa-shield-alt"></i> DDoS Protection</div>
                         </div>
-                        <a href="https://discord.com/channels/1148113389252522074/1365721945131192391" target="_blank" class="purchase-btn glow-effect">Purchase Now</a>
+                        <button class="purchase-btn glow-effect" onclick="createTicket('DIAMOND PLAN', '450rs/month')">Create Ticket</button>
                     </div>
                 </div>
 
+                <!-- DEBRIS PLAN -->
                 <div class="package-card glass-effect" data-aos="fade-up" data-aos-delay="350">
                     <div class="package-header knight-gradient">
-                        <div class="rank-icon"><i class="fas fa-chess-knight"></i></div>
-                        <h3>KNIGHT</h3>
-                        <div class="package-price">399<span class="currency">rs</span></div>
+                        <div class="rank-icon">👑</div>
+                        <h3>DEBRIS PLAN</h3>
+                        <div class="package-price">600<span class="currency">rs/month</span></div>
+                        <div class="special-tag">CEO Choice</div>
                     </div>
                     <div class="package-info">
                         <div class="perks-list">
-                            <div class="perk-item"><i class="fas fa-check"></i> Lord Features</div>
-                            <div class="perk-item"><i class="fas fa-check"></i> Knight's Honor</div>
+                            <div class="perk-item"><i class="fas fa-memory"></i> 16GB RAM</div>
+                            <div class="perk-item"><i class="fas fa-microchip"></i> 500% CPU</div>
+                            <div class="perk-item"><i class="fas fa-hdd"></i> 60GB DISK</div>
+                            <div class="perk-item"><i class="fas fa-shield-alt"></i> DDoS Protection</div>
                         </div>
-                        <a href="https://discord.com/channels/1148113389252522074/1365721945131192391" target="_blank" class="purchase-btn glow-effect">Purchase Now</a>
+                        <button class="purchase-btn glow-effect" onclick="createTicket('DEBRIS PLAN', '600rs/month')">Create Ticket</button>
                     </div>
                 </div>
                 
+                <!-- NETHERITE PLAN -->
                 <div class="package-card glass-effect" data-aos="fade-up" data-aos-delay="400">
                     <div class="package-header eternal-gradient">
-                        <div class="rank-icon"><i class="fas fa-infinity"></i></div>
-                        <h3>ETERNAL</h3>
-                        <div class="package-price">501<span class="currency">rs</span></div>
-                        <div class="special-tag">Elite Status</div>
+                        <div class="rank-icon">💫</div>
+                        <h3>NETHERITE PLAN</h3>
+                        <div class="package-price">800<span class="currency">rs/month</span></div>
+                        <div class="special-tag">Premium</div>
                     </div>
                     <div class="package-info">
                         <div class="perks-list">
-                            <div class="perk-item"><i class="fas fa-check"></i> Knight Features</div>
-                            <div class="perk-item"><i class="fas fa-check"></i> Eternal Glory</div>
+                            <div class="perk-item"><i class="fas fa-memory"></i> 24GB RAM</div>
+                            <div class="perk-item"><i class="fas fa-microchip"></i> 600% CPU</div>
+                            <div class="perk-item"><i class="fas fa-hdd"></i> 80GB DISK</div>
+                            <div class="perk-item"><i class="fas fa-shield-alt"></i> DDoS Protection</div>
                         </div>
-                        <a href="https://discord.com/channels/1148113389252522074/1365721945131192391" target="_blank" class="purchase-btn glow-effect">Purchase Now</a>
+                        <button class="purchase-btn glow-effect" onclick="createTicket('NETHERITE PLAN', '800rs/month')">Create Ticket</button>
                     </div>
                 </div>
 
+                <!-- BEDROCK PLAN -->
                 <div class="package-card glass-effect premium-card" data-aos="fade-up" data-aos-delay="450">
-                    <span class="package-badge animated">BEST VALUE</span>
+                    <span class="package-badge animated">ULTIMATE</span>
                     <div class="package-header ultra-gradient">
-                        <div class="rank-icon"><i class="fas fa-dragon"></i></div>
-                        <h3>ULTRA</h3>
-                        <div class="package-price">599<span class="currency">rs</span></div>
-                        <div class="special-tag">Ultimate Power</div>
+                        <div class="rank-icon">⚡</div>
+                        <h3>BEDROCK PLAN</h3>
+                        <div class="package-price">1200<span class="currency">rs/month</span></div>
+                        <div class="special-tag">Maximum Power</div>
                     </div>
                     <div class="package-info">
                         <div class="perks-list">
-                            <div class="perk-item"><i class="fas fa-check"></i> All Features</div>
-                            <div class="perk-item"><i class="fas fa-check"></i> Ultra Dominance</div>
+                            <div class="perk-item"><i class="fas fa-memory"></i> 32GB RAM</div>
+                            <div class="perk-item"><i class="fas fa-microchip"></i> 800% CPU</div>
+                            <div class="perk-item"><i class="fas fa-hdd"></i> 100GB DISK</div>
+                            <div class="perk-item"><i class="fas fa-shield-alt"></i> DDoS Protection</div>
                         </div>
-                        <a href="https://discord.com/channels/1148113389252522074/1365721945131192391" target="_blank" class="purchase-btn glow-effect">Get Ultra Now</a>
+                        <button class="purchase-btn glow-effect" onclick="createTicket('BEDROCK PLAN', '1200rs/month')">Create Ticket</button>
                     </div>
+                </div>
+            </div>
+            
+            <!-- What's Included Section -->
+            <div class="features-section" data-aos="fade-up" data-aos-delay="500">
+                <h3 class="features-title">What's Included with Every Plan?</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span>🚀 99% UPTIME GUARANTEE</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>💬 NO DATALOSE GUARANTEE</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-shield"></i>
+                        <span>🛡️ DDoS Protection</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-cog"></i>
+                        <span>👑 PREMIUM PANEL</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-microchip"></i>
+                        <span>⚙️ 3.7 GHz CPU</span>
+                    </div>
+                </div>
+                <div class="ticket-info">
+                    <p><strong>Ready to get started?</strong></p>
+                    <p>Make a <strong>Melon Nodes- 99.9% Uptime</strong>〢‧₊˚🎟︲ᴛɪᴄᴋᴇᴛꜱ to purchase!</p>
                 </div>
             </div>
         </div>
@@ -240,7 +296,7 @@
                     <div class="footer-logo">
                         <img src="assets/logo.png" alt="MelonMC Logo">
                     </div>
-                    <p>The ultimate Minecraft server experience with premium gameplay, unique features, and an amazing community.</p>
+                    <p>Premium Minecraft server hosting with 99.9% uptime guarantee, DDoS protection, and powerful hardware for the ultimate gaming experience.</p>
                 </div>
                 
                 <div class="footer-column" data-aos="fade-up" data-aos-delay="200">
@@ -248,7 +304,7 @@
                     <div class="footer-links">
                         <a href="index.html">Home</a>
                         <a href="features.html">Features</a>
-                        <a href="ranks.html">Ranks</a>
+                        <a href="ranks.html">Hosting</a>
                         <a href="index.html#join">Join</a>
                         <a href="https://discord.com/channels/1148113389252522074/1365721945131192391" target="_blank">Store</a>
                     </div>
@@ -286,8 +342,8 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2023 MelonMC. All rights reserved.</p>
-                <p class="disclaimer">MelonMC is not affiliated with Mojang AB or Microsoft.</p>
+                <p>&copy; 2023 MelonNodes. All rights reserved.</p>
+                <p class="disclaimer">MelonNodes is not affiliated with Mojang AB or Microsoft.</p>
             </div>
         </div>
     </footer>
@@ -372,6 +428,24 @@
         // Check login status when page loads
         checkLogin();
     });
+
+    // Ticket creation function
+    function createTicket(planName, price) {
+        const gamertag = localStorage.getItem('gamertag');
+        if (!gamertag) {
+            alert('Please login first to create a ticket!');
+            return;
+        }
+        
+        // Create ticket message
+        const ticketMessage = `🎟️ **New Hosting Ticket**\n\n**Plan:** ${planName}\n**Price:** ${price}\n**User:** ${gamertag}\n**Discord:** Please provide your Discord username\n\n**Next Steps:**\n1. Join our Discord server\n2. Create a ticket in #tickets channel\n3. Mention this plan and your gamertag\n4. Our team will assist you with setup!`;
+        
+        // Show ticket information
+        alert(`Ticket Information:\n\n${ticketMessage.replace(/\*\*/g, '').replace(/🎟️/g, '')}\n\nPlease join our Discord and create a ticket with this information!`);
+        
+        // Redirect to Discord
+        window.open('https://discord.gg/melonmc', '_blank');
+    }
     </script>
 </body>
 </html> 
