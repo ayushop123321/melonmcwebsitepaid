@@ -438,13 +438,13 @@
         }
         
         // Create ticket message
-        const ticketMessage = `🎟️ **New Hosting Ticket**\n\n**Plan:** ${planName}\n**Price:** ${price}\n**User:** ${gamertag}\n**Discord:** Please provide your Discord username\n\n**Next Steps:**\n1. Join our Discord server\n2. Create a ticket in #tickets channel\n3. Mention this plan and your gamertag\n4. Our team will assist you with setup!`;
+        const ticketMessage = `🎟️ **New Hosting Ticket**\n\n**Plan:** ${planName}\n**Price:** ${price}\n**User:** ${gamertag}\n**Discord:** Please provide your Discord username\n\n**Next Steps:**\n1. Join our Discord server\n2. Go to the tickets channel\n3. Mention this plan and your gamertag\n4. Our team will assist you with setup!`;
         
         // Show ticket information
-        alert(`Ticket Information:\n\n${ticketMessage.replace(/\*\*/g, '').replace(/🎟️/g, '')}\n\nPlease join our Discord and create a ticket with this information!`);
+        alert(`Ticket Information:\n\n${ticketMessage.replace(/\*\*/g, '').replace(/🎟️/g, '')}\n\nRedirecting you to our Discord tickets channel...`);
         
-        // Redirect to Discord
-        window.open('https://discord.gg/melonmc', '_blank');
+        // Redirect to the specific Discord channel
+        window.open('https://discord.com/channels/1376849396737511454/1376849397253410840', '_blank');
     }
     </script>
 </body>
